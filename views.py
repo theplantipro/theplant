@@ -1,5 +1,6 @@
 from django.template.loader import get_template
 from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
 from data_log.models import Log
 import datetime
 
