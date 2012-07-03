@@ -14,7 +14,7 @@ urlpatterns = patterns('',
    (r'^search/$',search),
    (r'^inputs/$',inputs),
    (r'^inputs/thanks/$',thanks),
-   (r'^admin/$',include(admin.site.urls)),
+   (r'^admin/',include(admin.site.urls)),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),
     # url(r'^testproject/', include('testproject.foo.urls')),
