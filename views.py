@@ -23,6 +23,8 @@ def search(request):
    return HttpResponse(message)
 
 def inputs(request):
+   c = {}
+   c.update(csrf(request))
    errors=[]
    if request.method == 'POST':
       if not request.POST.get('date',''):
@@ -44,7 +46,8 @@ def inputs(request):
                note=request.POST.get('note'))
          l.save()
          return HttpResponseRedirect('/inputs/thanks/')
-   return render_to_response('input.html',{'errors':errors})
+   c.update({'errors':errors})
+   return render_to_response('input.html',c)
 
 def thanks(request):
    c = {}
