@@ -21,7 +21,7 @@ def search(request):
       message = 'You submitted an empty form.'
    return HttpResponse(message)
 
-def input(request):
+def inputs(request):
    errors=[]
    if request.method == 'POST':
       if not request.POST.get('date',''):
@@ -42,7 +42,10 @@ def input(request):
                humidity=request.POST.get('humid'),
                note=request.POST.get('note'))
          l.save()
-         return HttpResponseRedirect('/input/thanks/')
+         return HttpResponseRedirect('/inputs/thanks/')
    return render_to_response('input.html',{'errors':errors})
+
+def thanks(request):
+   render_to_response('thanks.html')
 
       
