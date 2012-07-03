@@ -1,10 +1,11 @@
 from django.conf.urls.defaults import patterns, include, url
 from testproject.views import hello, current_datetime,search_form,search
 from testproject.views import inputs,thanks
+from django.contrib import admin
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
-# admin.autodiscover()
+admin.autodiscover()
 
 urlpatterns = patterns('',
    (r'^hello/$', hello),
@@ -13,6 +14,7 @@ urlpatterns = patterns('',
    (r'^search/$',search),
    (r'^inputs/$',inputs),
    (r'^inputs/thanks/$',thanks),
+   (r'^admin/$',include(admin.site.urls)),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),
     # url(r'^testproject/', include('testproject.foo.urls')),
