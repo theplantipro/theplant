@@ -2,6 +2,7 @@ from django.template.loader import get_template
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from data_log.models import Log
+from django.core.context_processors import csrf
 import datetime
 
 def hello(request):
@@ -22,6 +23,8 @@ def search(request):
    return HttpResponse(message)
 
 def inputs(request):
+   c = {}
+   c.update(csrf(request))
    errors=[]
    if request.method == 'POST':
       if not request.POST.get('date',''):
@@ -46,6 +49,6 @@ def inputs(request):
    return render_to_response('input.html',{'errors':errors})
 
 def thanks(request):
-   return render_to_response('thanks.html')
+   return render_to_response('thanks.html',c)
 
       
