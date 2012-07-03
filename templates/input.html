@@ -1,0 +1,31 @@
+<html>
+   <head>
+      <title>Data input</title>
+   </head>
+
+<body>
+   <h1>Data input</h1>
+
+   {% if errors %}
+      <ul>
+         {% for error in errors %}
+         <li>{{ error }}</li>
+         {% endfor %}
+      </ul>
+   {% endif %}
+
+   <form action="/submit/" method="post">
+      <p>Date: <input type="date" name="date"></p>
+      <p>System 1 food (g): <input type="number" name="sys1"></p>
+      <p>System 2 food (g): <input type="number" name="sys2"></p>
+      <p>System 3 food (g): <input type="number" name="sys3"></p>
+      <p>System 4 food (g): <input type="number" name="sys4"></p>
+      <p>Makeup: <input type="text" name="makeup"></p>
+      <p>Temperature: <input type="number" name="temp"></p>
+      <p>ph: <input type="number" name="ph"></p>
+      <p>DO: <input type="number" name="do"></p>
+      <p>Humidity: <input type="number" name="humid"></p>
+      <p>Note: <input type="text" name="humid"></p>
+   </form>
+</body>
+</html>

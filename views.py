@@ -1,5 +1,6 @@
 from django.template.loader import get_template
 from django.shortcuts import render_to_response
+from data_log.models import Log
 import datetime
 
 def hello(request):
@@ -11,3 +12,36 @@ def current_datetime(request):
 
 def search_form(request):
    return render_to_response('search_form.html')
+
+def search(request):
+   if 'q' in request.GET:
+      message = 'You searched for: %r' % request.GET['q']
+   else:
+      message = 'You submitted an empty form.'
+   return HttpResponse(message)
+
+def input(request):
+   errors=[]
+   if request.method == 'POST':
+      if not request.POST.get('date',''):
+         errors.append('Enter a date')
+      if not request.POST.get('sys1',''):
+         errors.append('Enter for sys1')
+      if not errors:
+         l = Log(date=request.POST.get('date'),
+               author=request.POST.get('author'),
+               system1_food=request.POST.get('sys1'),
+               system2_food=request.POST.get('sys2'),
+               system3_food=request.POST.get('sys3'),
+               system4_food=request.POST.get('sys4'),
+               makeup_added=request.POST.get('makeup'),
+               temp=request.POST.get('temp'),
+               ph=request.POST.get('ph'),
+               do=request.POST.get('do'),
+               humidity=request.POST.get('humid'),
+               note=request.POST.get('note'))
+         l.save()
+         return HttpResponseRedirect('/input/thanks/')
+   return render_to_response('input.html',{'errors':errors})
+
+      
