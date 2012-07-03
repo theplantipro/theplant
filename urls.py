@@ -6,8 +6,8 @@ from testproject.views import hello, current_datetime,search_form
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-   ('^hello/$', hello),
-   ('^time/$',current_datetime), 
+   (r'^hello/$', hello),
+   (r'^time/$',current_datetime), 
    (r'^search-form/$',search_form),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),
