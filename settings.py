@@ -107,6 +107,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
    '/Users/seththompson/ThePlant/IProProject/testproject/templates',
+   '/home/seth/Django/TestProject1/testproject/templates',
 )
 
 INSTALLED_APPS = (
