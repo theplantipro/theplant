@@ -46,6 +46,6 @@ def inputs(request):
    return render_to_response('input.html',{'errors':errors})
 
 def thanks(request):
-   render_to_response('thanks.html')
+   return render_to_response('thanks.html')
 
       
