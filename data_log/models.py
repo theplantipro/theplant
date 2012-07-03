@@ -11,6 +11,6 @@ class Log(models.Model):
    makeup_added = models.CharField(max_length=200)
    temp = models.DecimalField()
    ph = models.DecimalField()
-   do = models.DecomalField()
-   humidity = models.DecomalField()
+   do = models.DecimalField()
+   humidity = models.DecimalField()
    note = models.CharField(max_length=1000)
