@@ -8,13 +8,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-   (r'^test/hello/$', hello),
-   (r'^test/time/$',current_datetime), 
-   (r'^test/search-form/$',search_form),
-   (r'^test/search/$',search),
-   (r'^test/inputs/$',inputs),
-   (r'^test/inputs/thanks/$',thanks),
-   (r'^admin/',include(admin.site.urls)),
+   (r'^app/hello/$', hello),
+   (r'^app/time/$',current_datetime), 
+   (r'^app/search-form/$',search_form),
+   (r'^app/search/$',search),
+   (r'^app/inputs/$',inputs),
+   (r'^app/inputs/thanks/$',thanks),
+   (r'^app/admin/',include(admin.site.urls)),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),
     # url(r'^testproject/', include('testproject.foo.urls')),
