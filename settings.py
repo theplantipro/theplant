@@ -2,8 +2,8 @@
 import os.path
 import sys
 
-DEBUG = False 
-#TEMPLATE_DEBUG = DEBUG
+DEBUG = True 
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
