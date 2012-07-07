@@ -7,7 +7,7 @@ from django.contrib import admin
 # from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
    (r'^test/hello/$', hello),
    (r'^test/time/$',current_datetime), 
    (r'^test/search-form/$',search_form),
