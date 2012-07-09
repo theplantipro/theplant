@@ -65,7 +65,8 @@ def download(request):
          errors.append('Enter for date')
       if not errors:
          path = '/srv/http/static/admin/files/test.xls'
-         os.remove(path)
+         if os.path.exists(path):
+            os.remove(path)
          date1 = request.GET.get('date1')
          date2 = request.GET.get('date2')
          wbk = xlwt.Workbook()
