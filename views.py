@@ -99,7 +99,7 @@ def process(request):
          sheet.write(0,11,'Note')
          i=1
          for obj in objects:
-            sheet.write(i,0,obj.date)
+            sheet.write(i,0,obj.date.strftime('%m/%d/%Y')
             sheet.write(i,1,obj.author)
             sheet.write(i,2,obj.system1_food)
             sheet.write(i,3,obj.system2_food)
