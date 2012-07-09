@@ -47,7 +47,7 @@ def inputs(request):
                humidity=request.POST.get('humid'),
                note=request.POST.get('note'))
          l.save()
-         return HttpResponseRedirect('/inputs/thanks/')
+         return HttpResponseRedirect('thanks/')
    c.update({'errors':errors})
    return render_to_response('input.html',c)
 
