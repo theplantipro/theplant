@@ -77,7 +77,7 @@ def process(request):
          sheet.write(0,1,date1)
          sheet.write(0,2,date2)
          wbk.save(path)
-         return render_to_response('/static/admin/files/test.xls')
+         return render_to_response('test.html')
 
    return render_to_response('download.html',{'errors':errors})
 
