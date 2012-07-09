@@ -112,6 +112,7 @@ def process(request):
             sheet.write(i,10,obj.humidity)
             sheet.write(i,11,obj.note)
             i=i+1
+         wbk.save(path)
             
          
          return render_to_response('test.html')
