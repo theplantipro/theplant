@@ -74,5 +74,8 @@ def download(request):
 
    return render_to_response('test.html',{'errors':errors})
 
+def test(request):
+   return render_to_response('test.html')
+
 
       
