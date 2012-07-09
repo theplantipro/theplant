@@ -5,6 +5,7 @@ from data_log.models import Log
 from django.core.context_processors import csrf
 import datetime
 import xlwt
+import os
 
 def hello(request):
     return HttpResponse("Hello world")
@@ -57,22 +58,24 @@ def thanks(request):
 
 def download(request):
    errors=[]
-   if request.method == 'POST':
+   if request.method == 'GET':
       if not request.GET.get('date1',''):
          errors.append('Enter a date')
       if not request.GET.get('date2',''):
          errors.append('Enter for date')
       if not errors:
+         path = '/srv/http/static/admin/files/test.xls'
+         os.remove(path)
          date1 = request.GET.get('date1')
          date2 = request.GET.get('date2')
          wbk = xlwt.Workbook()
          sheet = wbk.add_sheet('sheet 1')
          sheet.write(0,1,date1)
          sheet.write(0,1,date2)
-         wbk.save('/srv/http/static/admin/files/test.xls') 
-         return render_to_response('test.html')
+         wbk.save(path)
+         return render_to_response('download.html')
 
-   return render_to_response('test.html',{'errors':errors})
+   return render_to_response('download.html',{'errors':errors})
 
 def test(request):
    return render_to_response('test.html')
