@@ -70,13 +70,50 @@ def process(request):
          path = '/srv/http/static/admin/files/test.xls'
          if os.path.exists(path):
             os.remove(path)
-         date1 = request.GET.get('date1')
-         date2 = request.GET.get('date2')
+         date1s = request.GET.get('date1')
+         date2s = request.GET.get('date2')
+         date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+         date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
+         objects = Log.objects.filter(date__gte=date1,date__lte=date2)
+
+         
          wbk = xlwt.Workbook()
          sheet = wbk.add_sheet('sheet 1')
          sheet.write(0,1,date1)
          sheet.write(0,2,date2)
          wbk.save(path)
+
+         wbk = xlwt.Workbook()
+         sheet = wbk.add_sheet('sheet 1')
+         sheet.write(0,0,'Date')
+         sheet.write(0,1,'Name')
+         sheet.write(0,2,'Sys1 (g)')
+         sheet.write(0,3,'Sys2 (g)')
+         sheet.write(0,4,'Sys3 (g)')
+         sheet.write(0,5,'Sys4 (g)')
+         sheet.write(0,6,'makeup')
+         sheet.write(0,7,'temp (F)')
+         sheet.write(0,8,'pH')
+         sheet.write(0,9,'DO (mg)')
+         sheet.write(0,10,'Humidity')
+         sheet.write(0,11,'Note')
+         i=1
+         for obj in objects:
+            sheet.write(i,0,obj.date)
+            sheet.write(i,1,obj.author)
+            sheet.write(i,2,obj.system1_food)
+            sheet.write(i,3,obj.system2_food)
+            sheet.write(i,4,obj.system3_food)
+            sheet.write(i,5,obj.system4_food)
+            sheet.write(i,6,obj.makeup_added)
+            sheet.write(i,7,obj.temp)
+            sheet.write(i,8,obj.ph)
+            sheet.write(i,9,obj.do)
+            sheet.write(i,10,obj.humidity)
+            sheet.write(i,11,obj.note)
+            i=i+1
+            
+         
          return render_to_response('test.html')
 
    return render_to_response('download.html',{'errors':errors})
