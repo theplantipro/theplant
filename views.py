@@ -57,6 +57,9 @@ def thanks(request):
    return render_to_response('thanks.html',c)
 
 def download(request):
+   return render_to_response('download.html')
+
+def process(request):
    errors=[]
    if request.method == 'GET':
       if not request.GET.get('date1',''):
@@ -74,7 +77,7 @@ def download(request):
          sheet.write(0,1,date1)
          sheet.write(0,2,date2)
          wbk.save(path)
-         return render_to_response('download.html')
+         return render_to_response('/static/admin/files/test.xls')
 
    return render_to_response('download.html',{'errors':errors})
 

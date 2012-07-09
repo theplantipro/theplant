@@ -15,6 +15,7 @@ urlpatterns = patterns('',
    (r'^app/inputs/$',inputs),
    (r'^app/inputs/thanks/$',thanks),
    (r'^app/download/$',download),
+   (r'^app/download/process/$',process),
    (r'^app/test/$',test),
    (r'^app/admin/',include(admin.site.urls)),
     # Examples:
