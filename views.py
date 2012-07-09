@@ -54,4 +54,7 @@ def thanks(request):
    c.update(csrf(request))
    return render_to_response('thanks.html',c)
 
+def download(request):
+   return render_to_response('test.html')
+
       
