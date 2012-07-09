@@ -1,0 +1,23 @@
+<html>
+   <head>
+      <title>Get Data</title>
+   </head>
+
+<body>
+   <h1>Get Data</h1>
+
+   {% if errors %}
+      <ul>
+         {% for error in errors %}
+         <li>{{ error }}</li>
+         {% endfor %}
+      </ul>
+   {% endif %}
+
+   <form action="" method="get">
+      <p>Date: <input type="date" name="date1"></p>
+      <p>Date: <input type="date" name="date2"></p>
+      <input type="submit" value="Submit">
+   </form>
+</body>
+</html>
