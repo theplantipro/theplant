@@ -1,9 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from testproject.views import hello, current_datetime,search_form,search
-from testproject.views import inputs,thanks,download,test
-from django.contrib import admin
-
-# Uncomment the next two lines to enable the admin:
+from testproject.views import inputs,thanks,download,test,process
+from django.contrib import admin # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 admin.autodiscover()
 
