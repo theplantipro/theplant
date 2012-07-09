@@ -72,7 +72,7 @@ def download(request):
          wbk = xlwt.Workbook()
          sheet = wbk.add_sheet('sheet 1')
          sheet.write(0,1,date1)
-         sheet.write(0,1,date2)
+         sheet.write(0,2,date2)
          wbk.save(path)
          return render_to_response('download.html')
 
