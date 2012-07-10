@@ -74,7 +74,7 @@ def process(request):
          date2s = request.GET.get('date2')
          date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
          date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
-         objects = Log.objects.filter(date__gte=date1,date__lte=date2)
+         objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
 
          
          wbk = xlwt.Workbook()
