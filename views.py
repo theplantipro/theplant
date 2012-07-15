@@ -58,6 +58,8 @@ def inputs(request):
          system4_food = 0
       if not makeup_added:
          makeup_added = 0
+      if not temp:
+         temp = null
       if not errors:
          l = Log(date=date,
                author=author,
