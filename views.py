@@ -148,7 +148,7 @@ def process(request):
          wbk.save(path)
             
          
-         return HttpResponseRedirect(path)
+         return HttpResponseRedirect('/static/admin/files/test.xls')
          #return render_to_response('test.html')
 
    return render_to_response('download.html',{'errors':errors})
