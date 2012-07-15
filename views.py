@@ -68,8 +68,8 @@ def inputs(request):
                temp=temp,
                ph=ph,
                do=do,
-               humidity=humidity
-               note=note,
+               humidity=humidity,
+               note=note)
          l.save()
          return HttpResponseRedirect('thanks/')
    c.update({'errors':errors})
