@@ -113,6 +113,9 @@ def allobjects(request):
    write_to_spread(True)
    return HttpResponseRedirect('/static/admin/files/test.xls')
 
+def dateedit(request):
+
+
 def write_to_spread(isAll,date1=None,date2=None):
    if isAll:
       objects = Log.objects.all().order_by("date")

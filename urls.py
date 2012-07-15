@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from testproject.views import hello, current_datetime,search_form,search
-from testproject.views import inputs,thanks,download,process,allobjects
+from testproject.views import inputs,thanks,download,process,allobjects,dateedit
 from django.contrib import admin # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 admin.autodiscover()
@@ -15,6 +15,7 @@ urlpatterns = patterns('',
    (r'^app/download/$',download),
    (r'^app/download/process/$',process),
    (r'^app/download/allobjects/$',allobjects),
+   (r'^app/dateedit/$',dateedit),
    (r'^app/admin/',include(admin.site.urls)),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),
