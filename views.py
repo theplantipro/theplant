@@ -93,9 +93,9 @@ def process(request):
    if request.method == 'GET':
       date1s = request.GET.get('date1','')
       date2s = request.GET.get('date2','')
-      if not date1s
+      if not date1s:
          errors.append('Enter a start date')
-      if not date2s
+      if not date2s:
          errors.append('Enter an end date')
       if date1s && date2s: 
          date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
