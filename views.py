@@ -29,7 +29,8 @@ def inputs(request):
    c.update(csrf(request))
    errors=[]
    if request.method == 'POST':
-      date=request.POST.get('date')
+      author=request.POST.get('author','')
+      date=request.POST.get('date','')
       system1_food=request.POST.get('sys1','') 
       system2_food=request.POST.get('sys2','')
       system3_food=request.POST.get('sys3','')
