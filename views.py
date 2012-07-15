@@ -109,6 +109,9 @@ def process(request):
 
    return render_to_response('download.html',{'errors':errors})
 
+def allobjects(request):
+   write_to_spread(True)
+   return HttpResponseRedirect('/static/admin/files/test.xls')
 
 def write_to_spread(isAll,date1=None,date2=None):
    if isAll:
