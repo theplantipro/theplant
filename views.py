@@ -149,12 +149,7 @@ def process(request):
             
          
          return HttpResponseRedirect('/static/admin/files/test.xls')
-         #return render_to_response('test.html')
 
    return render_to_response('download.html',{'errors':errors})
-
-def test(request):
-   return render_to_response('test.html')
-
 
       
