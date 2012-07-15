@@ -114,6 +114,14 @@ def allobjects(request):
    return HttpResponseRedirect('/static/admin/files/test.xls')
 
 def dateedit(request):
+   return render_to_response('dateedit.html')
+
+def processdate(request):
+   if request.method == 'GET':
+      date1s = request.GET.get('date1','')
+      date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+      objects = Log.objects.filter(date=date1)
+   
 
 
 def write_to_spread(isAll,date1=None,date2=None):
