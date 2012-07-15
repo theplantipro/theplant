@@ -59,7 +59,15 @@ def inputs(request):
       if not makeup_added:
          makeup_added = 0
       if not temp:
-         temp = null
+         temp = None 
+      if not ph:
+         ph = None 
+      if not do:
+         do = None 
+      if not humidity:
+         humidity = None 
+      if not note:
+         note = None 
       if not errors:
          l = Log(date=date,
                author=author,
