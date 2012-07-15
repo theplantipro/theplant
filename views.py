@@ -97,7 +97,7 @@ def process(request):
          errors.append('Enter a start date')
       if not date2s:
          errors.append('Enter an end date')
-      if date1s && date2s: 
+      if date1s and date2s: 
          date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
          date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
          if date2<date1:
