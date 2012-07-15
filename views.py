@@ -29,23 +29,47 @@ def inputs(request):
    c.update(csrf(request))
    errors=[]
    if request.method == 'POST':
-      if not request.POST.get('date',''):
+      date=request.POST.get('date')
+      system1_food=request.POST.get('sys1','') 
+      system2_food=request.POST.get('sys2','')
+      system3_food=request.POST.get('sys3','')
+      system4_food=request.POST.get('sys4','')
+      makeup_added=request.POST.get('makeup','')
+      temp=request.POST.get('temp','')
+      ph=request.POST.get('ph','')
+      do=request.POST.get('do','')
+      humidity=request.POST.get('humid','')
+      note=request.POST.get('note','')
+
+      if not date:
          errors.append('Enter a date')
-      if not request.POST.get('sys1',''):
-         errors.append('Enter for sys1')
+      if not system1_food:
+         system1_food = 0
+         try:
+            float(system1_food) 
+         except:
+            errors.append('Sys1 not a number!')
+      if not system2_food:
+         system2_food = 0
+      if not system3_food:
+         system3_food = 0
+      if not system4_food:
+         system4_food = 0
+      if not makeup_added:
+         makeup_added = 0
       if not errors:
-         l = Log(date=request.POST.get('date'),
-               author=request.POST.get('author'),
-               system1_food=request.POST.get('sys1'),
-               system2_food=request.POST.get('sys2'),
-               system3_food=request.POST.get('sys3'),
-               system4_food=request.POST.get('sys4'),
-               makeup_added=request.POST.get('makeup'),
-               temp=request.POST.get('temp'),
-               ph=request.POST.get('ph'),
-               do=request.POST.get('do'),
-               humidity=request.POST.get('humid'),
-               note=request.POST.get('note'))
+         l = Log(date=date,
+               author=author,
+               system1_food=system1_food,
+               system2_food=system2_food,
+               system3_food=system3_food,
+               system4_food=system4_food,
+               makeup_added=makeup_added,
+               temp=temp,
+               ph=ph,
+               do=do,
+               humidity=humidity
+               note=note,
          l.save()
          return HttpResponseRedirect('thanks/')
    c.update({'errors':errors})
