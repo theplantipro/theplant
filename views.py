@@ -46,10 +46,6 @@ def inputs(request):
          errors.append('Enter a date')
       if not system1_food:
          system1_food = 0
-         try:
-            float(system1_food) 
-         except:
-            errors.append('Sys1 not a number!')
       if not system2_food:
          system2_food = 0
       if not system3_food:
@@ -95,18 +91,22 @@ def download(request):
 def process(request):
    errors=[]
    if request.method == 'GET':
-      if not request.GET.get('date1',''):
-         errors.append('Enter a date')
-      if not request.GET.get('date2',''):
-         errors.append('Enter for date')
+      date1s = request.GET.get('date1','')
+      date2s = request.GET.get('date2','')
+      if not date1s
+         errors.append('Enter a start date')
+      if not date2s
+         errors.append('Enter an end date')
+      if date1s && date2s: 
+         date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+         date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
+         if date2<date1:
+            errors.append('Starting date must be less or equal to ending date')
+     
       if not errors:
          path = '/srv/http/static/admin/files/test.xls'
          if os.path.exists(path):
             os.remove(path)
-         date1s = request.GET.get('date1')
-         date2s = request.GET.get('date2')
-         date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
-         date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
          objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
 
          
