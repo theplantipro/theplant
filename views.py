@@ -148,7 +148,8 @@ def process(request):
          wbk.save(path)
             
          
-         return render_to_response('test.html')
+         return HttpResponseRedirect(path)
+         #return render_to_response('test.html')
 
    return render_to_response('download.html',{'errors':errors})
 
