@@ -115,7 +115,7 @@ def allobjects(request):
 
 def write_to_spread(isAll,date1=None,date2=None):
    if isAll:
-      objects = Log.objects.all.order_by("date")
+      objects = Log.objects.all().order_by("date")
    else:
       objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
 
