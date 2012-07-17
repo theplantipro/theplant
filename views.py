@@ -24,7 +24,7 @@ def search(request):
       message = 'You submitted an empty form.'
    return HttpResponse(message)
 
-def inputs(request,theid=None):
+def inputs(request):
    c = {}
    c.update(csrf(request))
    errors=[]
@@ -63,34 +63,19 @@ def inputs(request,theid=None):
       if not humidity:
          humidity = -1 
       if not errors:
-         l = None
-         if theid is None:
-            l = Log(date=date,
-                  author=author,
-                  system1_food=system1_food,
-                  system2_food=system2_food,
-                  system3_food=system3_food,
-                  system4_food=system4_food,
-                  makeup_added=makeup_added,
-                  temp=temp,
-                  ph=ph,
-                  do=do,
-                  humidity=humidity,
-                  note=note)
-         else:
-            l = Log.objects.filter(id=int(theid))[0]
-            l.author = author
-            l.system1_food=system1_food
-            l.system2_food=system2_food
-            l.system3_food=system3_food
-            l.system4_food=system4_food
-            l.makeup_added=makeup_added
-            l.temp=temp
-            l.ph=ph
-            l.do=do
-            l.humidity=humidity
-            l.note=note
-            
+         l = Log(date=date,
+               author=author,
+               system1_food=system1_food,
+               system2_food=system2_food,
+               system3_food=system3_food,
+               system4_food=system4_food,
+               makeup_added=makeup_added,
+               temp=temp,
+               ph=ph,
+               do=do,
+               humidity=humidity,
+               note=note)
+         
          l.save()
          return HttpResponseRedirect('thanks/')
    c.update({'errors':errors})
@@ -165,6 +150,65 @@ def edit(request,theid):
       log.humidity= '' 
    errors = []
    return render_to_response('edit.html',{'log':log,'errors':errors})
+
+def edittest(request):
+   c = {}
+   c.update(csrf(request))
+   errors=[]
+   if request.method == 'POST':
+      author=request.POST.get('author','')
+      date=request.POST.get('date','')
+      system1_food=request.POST.get('sys1','') 
+      system2_food=request.POST.get('sys2','')
+      system3_food=request.POST.get('sys3','')
+      system4_food=request.POST.get('sys4','')
+      makeup_added=request.POST.get('makeup','')
+      temp=request.POST.get('temp','')
+      ph=request.POST.get('ph','')
+      do=request.POST.get('do','')
+      humidity=request.POST.get('humid','')
+      note=request.POST.get('note','')
+
+      if not date:
+         errors.append('Enter a date')
+      if not system1_food:
+         system1_food = 0
+      if not system2_food:
+         system2_food = 0
+      if not system3_food:
+         system3_food = 0
+      if not system4_food:
+         system4_food = 0
+      if not makeup_added:
+         makeup_added = 0
+      if not temp:
+         temp = -1 
+      if not ph:
+         ph = -1 
+      if not do:
+         do = -1 
+      if not humidity:
+         humidity = -1 
+      if not errors:
+         l = Log.objects.filter(id=int(theid))[0]
+         l.author = author
+         l.system1_food=system1_food
+         l.system2_food=system2_food
+         l.system3_food=system3_food
+         l.system4_food=system4_food
+         l.makeup_added=makeup_added
+         l.temp=temp
+         l.ph=ph
+         l.do=do
+         l.humidity=humidity
+         l.note=note
+            
+         l.save()
+         return HttpResponseRedirect('thanks/')
+   c.update({'errors':errors})
+   return render_to_response('edit.html',c)
+
+
 
 
    
