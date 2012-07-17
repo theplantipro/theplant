@@ -20,7 +20,7 @@ urlpatterns = patterns('',
    (r'^app/dateedit/processdate/$',processdate),
    (r'^app/dateedit/processdate/(\d+)/getlog/$',getlog),
    (r'^app/dateedit/processdate/(\d+)/edit/$',edit),
-   (r'^app/dateedit/processdate/(\d+)/edit/thanks/$',thanks),
+   (r'^app/dateedit/processdate/\d+/edit/thanks/$',thanks),
    (r'^app/admin/',include(admin.site.urls)),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),
