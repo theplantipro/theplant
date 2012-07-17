@@ -128,8 +128,8 @@ def getlog(request,theid):
    log = Log.objects.filter(id=int(theid))[0]
    c = {}
    c.update(csrf(request))
-   c.update(errors)
-   c.update(log)
+   c.update({'errors':errors})
+   c.update({'log':log})
    return render_to_response('edit.html',c)
    
    
