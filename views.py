@@ -151,7 +151,7 @@ def edittest(request,theid):
    errors = []
    return render_to_response('edit.html',{'log':log,'errors':errors})
 
-def edit(request):
+def edit(request,throwaway=None):
    c = {}
    c.update(csrf(request))
    errors=[]
