@@ -24,7 +24,7 @@ def search(request):
       message = 'You submitted an empty form.'
    return HttpResponse(message)
 
-def inputs(request, log=None):
+def inputs(request,theid):
    c = {}
    c.update(csrf(request))
    errors=[]
@@ -63,18 +63,34 @@ def inputs(request, log=None):
       if not humidity:
          humidity = -1 
       if not errors:
-         l = Log(date=date,
-               author=author,
-               system1_food=system1_food,
-               system2_food=system2_food,
-               system3_food=system3_food,
-               system4_food=system4_food,
-               makeup_added=makeup_added,
-               temp=temp,
-               ph=ph,
-               do=do,
-               humidity=humidity,
-               note=note)
+         l = None
+         if theid == '':
+            l = Log(date=date,
+                  author=author,
+                  system1_food=system1_food,
+                  system2_food=system2_food,
+                  system3_food=system3_food,
+                  system4_food=system4_food,
+                  makeup_added=makeup_added,
+                  temp=temp,
+                  ph=ph,
+                  do=do,
+                  humidity=humidity,
+                  note=note)
+         else:
+            l = Log.objects.filter(id=int(theid))[0]
+            l.author = author
+            l.system1_food=system1_food
+            l.system2_food=system2_food
+            l.system3_food=system3_food
+            l.system4_food=system4_food
+            l.makeup_added=makeup_added
+            l.temp=temp
+            l.ph=ph
+            l.do=do
+            l.humidity=humidity
+            l.note=note
+            
          l.save()
          return HttpResponseRedirect('thanks/')
    c.update({'errors':errors})
@@ -122,6 +138,16 @@ def processdate(request):
       date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
       objects = Log.objects.filter(date=date1)
       return render_to_response('processdate.html',{'date_list':objects})
+
+def edittoinput(request,theid):
+   try:
+      theid = int(theid)
+   except:
+      raise Http404()
+   log = Log.objects.filter(id=theid)[0]
+   return HttpResponseRedirect('/static/admin/files/test.xls')
+   
+   
 
 def edit(request,theid):
    try:

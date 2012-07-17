@@ -14,7 +14,7 @@
       </ul>
    {% endif %}
 
-   <form action=/app/edittoinput/{{log.id}} method="post">{% csrf_token %}
+   <form action="/app/edittoinput/{{log.id}}" method="post">{% csrf_token %}
       <p>Date: <input type="date" name="date" value={{log.date}}></p>
       <p>Author: <input type="text" name="author" value={{log.author}}></p>
       <p>System 1 food (g): <input type="number" step="any" name="sys1" value={{log.system1_food}}></p>
