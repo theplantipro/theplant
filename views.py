@@ -134,7 +134,7 @@ def edittoinput(request,theid):
    
    
 
-def edit(request,theid):
+def edittest(request,theid):
    try:
       theid = int(theid)
    except:
@@ -151,7 +151,7 @@ def edit(request,theid):
    errors = []
    return render_to_response('edit.html',{'log':log,'errors':errors})
 
-def edittest(request):
+def edit(request):
    c = {}
    c.update(csrf(request))
    errors=[]
