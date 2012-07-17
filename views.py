@@ -163,7 +163,8 @@ def edit(request,theid):
       log.do= '' 
    if log.humidity== -1:
       log.humidity= '' 
-   return render_to_response('edit.html',{'log':log})
+   errors = []
+   return render_to_response('edit.html',{'log':log,'errors':errors})
 
 
    
