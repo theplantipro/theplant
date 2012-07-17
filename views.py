@@ -24,7 +24,7 @@ def search(request):
       message = 'You submitted an empty form.'
    return HttpResponse(message)
 
-def inputs(request,theid):
+def inputs(request,theid=None):
    c = {}
    c.update(csrf(request))
    errors=[]
@@ -64,7 +64,7 @@ def inputs(request,theid):
          humidity = -1 
       if not errors:
          l = None
-         if theid == '':
+         if theid is None:
             l = Log(date=date,
                   author=author,
                   system1_food=system1_food,
