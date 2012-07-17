@@ -15,18 +15,18 @@
    {% endif %}
 
    <form action="" method="post">{% csrf_token %}
-      <p>Date: <input type="date" name="date"></p>
-      <p>Author: <input type="text" name="author"></p>
-      <p>System 1 food (g): <input type="number" step="any" name="sys1"></p>
-      <p>System 2 food (g): <input type="number" step="any"name="sys2"></p>
-      <p>System 3 food (g): <input type="number" step="any"name="sys3"></p>
-      <p>System 4 food (g): <input type="number" step="any"name="sys4"></p>
-      <p>Makeup: <input type="text" name="makeup"></p>
-      <p>Temperature: <input type="number" step="any"name="temp"></p>
-      <p>ph: <input type="number" step="any"name="ph"></p>
-      <p>DO: <input type="number" step="any"name="do"></p>
-      <p>Humidity: <input type="number" step="any"name="humid"></p>
-      <p>Note: <input type="text" name="note"></p>
+      <p>Date: <input type="date" name="date" value={{log.date}}></p>
+      <p>Author: <input type="text" name="author" value={{log.author}}></p>
+      <p>System 1 food (g): <input type="number" step="any" name="sys1" value={{log.system1_food}}></p>
+      <p>System 2 food (g): <input type="number" step="any"name="sys2" value={{log.system2_food}}></p>
+      <p>System 3 food (g): <input type="number" step="any"name="sys3" value={{log.system3_food}}></p>
+      <p>System 4 food (g): <input type="number" step="any"name="sys4" value={{log.system4_food}}></p>
+      <p>Makeup: <input type="text" name="makeup" value={{log.makeup_added}}></p>
+      <p>Temperature: <input type="number" step="any" name="temp" value={{log.temp}}></p>
+      <p>ph: <input type="number" step="any" name="ph" value={{log.ph}}></p>
+      <p>DO: <input type="number" step="any" name="do" value={{log.do}}></p>
+      <p>Humidity: <input type="number" step="any" name="humid" value={{log.humidity}}></p>
+      <p>Note: <input type="text" name="note" value={{log.humidity}}></p>
       <input type="submit" value="Submit">
    </form>
 </body>

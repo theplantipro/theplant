@@ -122,6 +122,25 @@ def processdate(request):
       date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
       objects = Log.objects.filter(date=date1)
       return render_to_response('processdate.html',{'date_list':objects,'ids':ids})
+
+def edit(request,theid):
+   try:
+      theid = int(theid)
+   except:
+      raise Http404()
+   log = Log.objects.filter(id=theid)[0]
+   if log.temp == -1:
+      log.temp = '' 
+   if log.ph== -1:
+      log.ph= '' 
+   if log.do== -1:
+      log.do= '' 
+   if log.humidity== -1:
+      log.humidity= '' 
+   return render_to_response('edit.html',{'log':log})
+
+   
+
    
 
 
