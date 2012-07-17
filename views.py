@@ -125,33 +125,12 @@ def processdate(request):
       return render_to_response('processdate.html',{'date_list':objects})
 
 def getlog(request,theid):
-   log = Log.objects.filter(id=int(theid))[0]
    errors=[]
    c = {}
    c.update(csrf(request))
    c.update({'errors':errors})
    c.update({'log':log})
    return render_to_response('edit.html',c)
-   
-   
-   
-
-def edittest(request,theid):
-   try:
-      theid = int(theid)
-   except:
-      raise Http404()
-   log = Log.objects.filter(id=theid)[0]
-   if log.temp == -1:
-      log.temp = '' 
-   if log.ph== -1:
-      log.ph= '' 
-   if log.do== -1:
-      log.do= '' 
-   if log.humidity== -1:
-      log.humidity= '' 
-   errors = []
-   return render_to_response('edit.html',{'log':log,'errors':errors})
 
 def edit(request,theid):
    c = {}
@@ -207,6 +186,11 @@ def edit(request,theid):
             
          l.save()
          return HttpResponseRedirect('thanks/')
+   else:
+      log = Log.objects.filter(id=int(theid))[0]
+      c.update({'log':log})
+      return render_to_response('edit.html',c)
+      
    c.update({'errors':errors})
    return render_to_response('edit.html',c)
 
