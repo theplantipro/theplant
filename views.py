@@ -126,8 +126,11 @@ def processdate(request):
 
 def getlog(request,theid):
    log = Log.objects.filter(id=int(theid))[0]
-   errors = []
-   return render_to_response('edit.html',{'errors':errors,'log':log})
+   c = {}
+   c.update(csrf(request))
+   c.update(errors)
+   c.update(log)
+   return render_to_response('edit.html',c)
    
    
    
