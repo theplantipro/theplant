@@ -124,13 +124,11 @@ def processdate(request):
       objects = Log.objects.filter(date=date1)
       return render_to_response('processdate.html',{'date_list':objects})
 
-def edittoinput(request,theid):
-   try:
-      theid = int(theid)
-   except:
-      raise Http404()
-   log = Log.objects.filter(id=theid)[0]
-   return HttpResponseRedirect('/static/admin/files/test.xls')
+def getlog(request,theid):
+   log = Log.objects.filter(id=int(theid))[0]
+   errors = []
+   return render_to_response('edit.html',{'errors':errors,'log':log})
+   
    
    
 
