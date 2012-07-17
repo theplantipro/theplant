@@ -124,14 +124,6 @@ def processdate(request):
       objects = Log.objects.filter(date=date1)
       return render_to_response('processdate.html',{'date_list':objects})
 
-def getlog(request,theid):
-   errors=[]
-   c = {}
-   c.update(csrf(request))
-   c.update({'errors':errors})
-   c.update({'log':log})
-   return render_to_response('edit.html',c)
-
 def edit(request,theid):
    c = {}
    c.update(csrf(request))
@@ -188,6 +180,16 @@ def edit(request,theid):
          return HttpResponseRedirect('thanks/')
    else:
       log = Log.objects.filter(id=int(theid))[0]
+      if log.temp == -1:
+         log.temp = '' 
+      if log.ph== -1:
+         log.ph= '' 
+      if log.do== -1:
+         log.do = '' 
+      if log.humidity== -1:
+         log.humidity = '' 
+      log.date = str(log.date)
+    
       c.update({'log':log})
       return render_to_response('edit.html',c)
       
