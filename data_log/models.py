@@ -14,3 +14,6 @@ class Log(models.Model):
    do = models.DecimalField(max_digits=6, decimal_places=3)
    humidity = models.DecimalField(max_digits=6, decimal_places=3)
    note = models.CharField(max_length=1000)
+
+   def __unicode__(self):
+      return u'%s %s' % (self.author,self.date)
