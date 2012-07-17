@@ -24,7 +24,7 @@ def search(request):
       message = 'You submitted an empty form.'
    return HttpResponse(message)
 
-def inputs(request):
+def inputs(request, log=None):
    c = {}
    c.update(csrf(request))
    errors=[]
@@ -138,6 +138,7 @@ def edit(request,theid):
    if log.humidity== -1:
       log.humidity= '' 
    return render_to_response('edit.html',{'log':log})
+
 
    
 
