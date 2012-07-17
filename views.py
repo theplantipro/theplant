@@ -122,7 +122,7 @@ def processdate(request):
       date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
       objects = Log.objects.filter(date=date1)
       ids = []
-      for temp in objects
+      for temp in objects:
          ids.append(temp.id)
       return render_to_response('processdate.html',{'date_list':objects,'ids':ids})
    
