@@ -121,7 +121,7 @@ def processdate(request):
       date1s = request.GET.get('date1','')
       date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
       objects = Log.objects.filter(date=date1)
-      return render_to_response('processdate.html',{'date_list':objects,'ids':ids})
+      return render_to_response('processdate.html',{'date_list':objects})
 
 def edit(request,theid):
    try:
