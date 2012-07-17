@@ -126,6 +126,7 @@ def processdate(request):
 
 def getlog(request,theid):
    log = Log.objects.filter(id=int(theid))[0]
+   errors=[]
    c = {}
    c.update(csrf(request))
    c.update({'errors':errors})
