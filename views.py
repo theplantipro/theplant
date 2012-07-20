@@ -6,6 +6,8 @@ from django.core.context_processors import csrf
 import datetime
 import xlwt
 import os
+import numpy as np
+import matplotlib.pyplot as plt
 
 def hello(request):
     return HttpResponse("Hello world")
@@ -245,6 +247,37 @@ def write_to_spread(isAll,date1=None,date2=None):
       sheet.write(i,11,obj.note)
       i=i+1
    wbk.save(path)
+
+def generate_plot(date1s,date2s):
+   date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+   date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
+   objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
+   xy = [(x,y) for x in objects.date and y in objects.temp]
+   xy_filtered = filter(filter_out,xy)
+   x = [temp[0] for temp in xy]
+   y_temp = [temp[1] for temp in xy]
+   y = map(parse_floats,y_temp)
+   plt.scatter(x,y)
+   plt.savefig('/Users/seththompson/TempDir/test.png')
+
+def parse_floats(string):
+   if string is None:
+      return 0
+   if string is '':
+      return 0
+   try:
+      return float(string)
+   except:
+      return 0
+
+def filter_out(xy):
+   try:
+      return int(xy[1]) != -1
+   except:
+      return False
+   
+   
+   
          
    
    
