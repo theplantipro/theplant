@@ -248,9 +248,30 @@ def write_to_spread(isAll,date1=None,date2=None):
       i=i+1
    wbk.save(path)
 
-def generate_plot(date1s,date2s):
-   date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
-   date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
+def plot(request):
+   errors=[]
+   if request.method == 'GET':
+      date1s = request.GET.get('date1','')
+      date2s = request.GET.get('date2','')
+      if not date1s:
+         errors.append('Enter a start date')
+      if not date2s:
+         errors.append('Enter an end date')
+      if date1s and date2s: 
+         date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+         date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
+         if date2<date1:
+            errors.append('Starting date must be less or equal to ending date')
+     
+      if not errors:
+         generate_plot(date1,date2)
+         return HttpResponseRedirect('/static/admin/files/test.png')
+
+   return render_to_response('download.html',{'errors':errors})
+
+def generate_plot(date1,date2):
+   #date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+   #date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
    objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
    xy = [(x,y) for x in objects.date and y in objects.temp]
    xy_filtered = filter(filter_out,xy)
@@ -258,7 +279,7 @@ def generate_plot(date1s,date2s):
    y_temp = [temp[1] for temp in xy]
    y = map(parse_floats,y_temp)
    plt.scatter(x,y)
-   plt.savefig('/Users/seththompson/TempDir/test.png')
+   plt.savefig('/static/admin/files/test.png')
 
 def parse_floats(string):
    if string is None:
