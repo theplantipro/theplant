@@ -269,17 +269,30 @@ def plot(request):
 
    return render_to_response('download.html',{'errors':errors})
 
-def generate_plot(date1,date2):
+def generate_plot(date1,date2,thetype):
    #date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
    #date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
    objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
-   xy = [(x,y) for x in objects.date and y in objects.temp]
+   yaxis = []
+   if thetype == 0:
+      yaxis = [o.date for o in objects]
+   elif thetype == 1:
+      yaxis = [o.ph for o in objects]
+   elif thetype == 2:
+      yaxis = [o.do for o in objects]
+   elif thetype == 3:
+      yaxis = [o.humidity for o in objects]
+   dates = [o.date for o in objects]
+   xy = zip(dates,yaxis)
    xy_filtered = filter(filter_out,xy)
    x = [temp[0] for temp in xy]
    y_temp = [temp[1] for temp in xy]
    y = map(parse_floats,y_temp)
+   fig = plt.figure()
+   ax = fig.add_subplot(1,1,1)
+   fig.autofmt_xdate()
    plt.scatter(x,y)
-   plt.savefig('/static/admin/files/test.png')
+   plt.savefig('srv/http/static/admin/files/test.png')
 
 def parse_floats(string):
    if string is None:
