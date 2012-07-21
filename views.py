@@ -321,7 +321,7 @@ def generate_plot(date1,date2,thetype):
 
    fig.autofmt_xdate()
    plt.scatter(x,y)
-   plt.text(3,9,"aslkdfjalksjdf laksjd flkajs dflkasj dflkasjd flkas dftewtingg")
+   plt.text(0,0,"aslkdfjalksjdf laksjd flkajs dflkasj dflkasjd flkas dftewtingg")
    plt.savefig(path)
 
 def parse_floats(string):
