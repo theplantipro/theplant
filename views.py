@@ -264,12 +264,15 @@ def plot(request):
             errors.append('Starting date must be less or equal to ending date')
      
       if not errors:
-         generate_plot(date1,date2)
+         generate_plot(date1,date2,3)
          return HttpResponseRedirect('/static/admin/files/test.png')
 
    return render_to_response('download.html',{'errors':errors})
 
 def generate_plot(date1,date2,thetype):
+   path = '/srv/http/static/admin/files/test.png'
+   if os.path.exists(path):
+      os.remove(path)
    #date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
    #date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
    objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
@@ -285,14 +288,14 @@ def generate_plot(date1,date2,thetype):
    dates = [o.date for o in objects]
    xy = zip(dates,yaxis)
    xy_filtered = filter(filter_out,xy)
-   x = [temp[0] for temp in xy]
-   y_temp = [temp[1] for temp in xy]
+   x = [temp[0] for temp in xy_filtered]
+   y_temp = [temp[1] for temp in xy_filtered]
    y = map(parse_floats,y_temp)
    fig = plt.figure()
    ax = fig.add_subplot(1,1,1)
    fig.autofmt_xdate()
    plt.scatter(x,y)
-   plt.savefig('srv/http/static/admin/files/test.png')
+   plt.savefig(path)
 
 def parse_floats(string):
    if string is None:
@@ -305,6 +308,8 @@ def parse_floats(string):
       return 0
 
 def filter_out(xy):
+   if xy == '' or xy is None:
+      return False
    try:
       return int(xy[1]) != -1
    except:
