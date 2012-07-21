@@ -311,7 +311,7 @@ def generate_plot(date1,date2,thetype):
   
    y = map(parse_floats,y_temp)
    average = sum(y)/len(y)
-   text(1,1,"tewtingg")
+   plt.text(1,1,"tewtingg")
 
 
    fig = plt.figure()
