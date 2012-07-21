@@ -308,7 +308,12 @@ def generate_plot(date1,date2,thetype):
    xy_filtered = filter(filter_out,xy)
    x = [temp[0] for temp in xy_filtered]
    y_temp = [temp[1] for temp in xy_filtered]
+  
    y = map(parse_floats,y_temp)
+   average = sum(y)/len(y)
+   text(1,1,"tewtingg")
+
+
    fig = plt.figure()
    ax = fig.add_subplot(1,1,1)
 
