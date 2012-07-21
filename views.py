@@ -321,8 +321,8 @@ def generate_plot(date1,date2,thetype):
 
    fig.autofmt_xdate()
    plt.scatter(x,y)
-   txt = "Average %f" % average
-   fig.text(0,0,txt,bbox=dict(facecolor='red',alpha=0.5))
+   txt = "Average: %.1f" % average
+   fig.text(1,1,txt,bbox=dict(facecolor='red',alpha=0.3))
    plt.savefig(path)
 
 def parse_floats(string):
