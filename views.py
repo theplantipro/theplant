@@ -8,6 +8,8 @@ import xlwt
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from pylab import *
+
 
 def hello(request):
     return HttpResponse("Hello world")
