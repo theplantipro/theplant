@@ -291,9 +291,10 @@ def generate_plot(date1,date2,thetype):
    path = '/srv/http/static/admin/files/test.png'
    if os.path.exists(path):
       os.remove(path)
-   #date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
-   #date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
    objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
+   fig = plt.figure()
+   ax = fig.add_subplot(1,1,1)
+   ax.set_xlabel("yep")
    yaxis = []
    if thetype == 0:
       yaxis = [o.temp for o in objects]
@@ -324,8 +325,8 @@ def generate_plot(date1,date2,thetype):
    average = sum(y)/len(y)
 
 
-   fig = plt.figure()
-   ax = fig.add_subplot(1,1,1)
+   #fig = plt.figure()
+   #ax = fig.add_subplot(1,1,1)
 
    ax.yaxis.set_major_formatter(FuncFormatter(lambda y,pos:('%.1f')%y))
    
