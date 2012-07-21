@@ -299,6 +299,10 @@ def generate_plot(date1,date2,thetype):
       yaxis = [o.do for o in objects]
    elif thetype == 3:
       yaxis = [o.humidity for o in objects]
+
+   locs,labels = yticks()
+   yticks(locs,map(lambda x: "%.1f" % x, locs)
+
    dates = [o.date for o in objects]
    xy = zip(dates,yaxis)
    xy_filtered = filter(filter_out,xy)
