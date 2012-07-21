@@ -105,7 +105,7 @@ def process(request):
       date2s = request.GET.get('date2','')
       if not isAll and not date1s:
          errors.append('Enter a start date')
-      if not isAll not date2s:
+      if not isAll and not date2s:
          errors.append('Enter an end date')
       if isAll or (date1s and date2s): 
          date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
