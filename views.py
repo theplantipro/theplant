@@ -295,6 +295,7 @@ def generate_plot(date1,date2,thetype):
    fig = plt.figure()
    ax = fig.add_subplot(1,1,1)
    ax.set_xlabel("Date",color='red')
+   ax.title("Title")
    yaxis = []
    if thetype == 0:
       yaxis = [o.temp for o in objects]
