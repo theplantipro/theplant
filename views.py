@@ -302,8 +302,6 @@ def generate_plot(date1,date2,thetype):
    elif thetype == 3:
       yaxis = [o.humidity for o in objects]
 
-   locs,labels = yticks()
-   yticks(locs,map(lambda x: "%.1f" % x, locs))
 
    dates = [o.date for o in objects]
    xy = zip(dates,yaxis)
@@ -314,6 +312,8 @@ def generate_plot(date1,date2,thetype):
    fig = plt.figure()
    ax = fig.add_subplot(1,1,1)
    fig.autofmt_xdate()
+   locs,labels = yticks()
+   yticks(locs,map(lambda x: "%.1f" % x, locs))
    plt.scatter(x,y)
    plt.savefig(path)
 
