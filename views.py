@@ -310,10 +310,10 @@ def generate_plot(date1,date2,thetype):
    y_temp = [temp[1] for temp in xy_filtered]
    y = map(parse_floats,y_temp)
    fig = plt.figure()
-   ax = fig.add_subplot(1,1,1)
-   fig.autofmt_xdate()
    locs,labels = yticks()
    yticks(locs,map(lambda x: "%.1f" % x, locs))
+   ax = fig.add_subplot(1,1,1)
+   fig.autofmt_xdate()
    plt.scatter(x,y)
    plt.savefig(path)
 
