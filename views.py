@@ -130,6 +130,8 @@ def process(request):
                generate_plot(date1,date2,2)
             elif action=="humidity":
                generate_plot(date1,date2,3)
+            else:
+               generate_plot(date1,date2,4)
             return HttpResponseRedirect('/static/admin/files/test.png')
  
 
@@ -301,6 +303,13 @@ def generate_plot(date1,date2,thetype):
       yaxis = [o.do for o in objects]
    elif thetype == 3:
       yaxis = [o.humidity for o in objects]
+   else:
+      f1 = [o.system1_food for o in objects]
+      f2 = [o.system2_food for o in objects]
+      f3 = [o.system3_food for o in objects]
+      f4 = [o.system4_food for o in objects]
+      yaxis = [a+b+c+d for a in f1 and b in f2 and c in f3 and d in f4]
+
 
 
    dates = [o.date for o in objects]
