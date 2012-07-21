@@ -93,14 +93,21 @@ def download(request):
 
 def process(request):
    errors=[]
+   date1 = ''
+   date2 = ''
    if request.method == 'GET':
+      isAll = request.GET.get('alldates','') == 'yes'
+      if isAll:
+         datetuple = getDates()
+         date1 = datetuple[0]
+         date2 = datetuple[1]
       date1s = request.GET.get('date1','')
       date2s = request.GET.get('date2','')
-      if not date1s:
+      if not isAll and not date1s:
          errors.append('Enter a start date')
-      if not date2s:
+      if not isAll not date2s:
          errors.append('Enter an end date')
-      if date1s and date2s: 
+      if isAll or (date1s and date2s): 
          date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
          date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
          if date2<date1:
@@ -307,6 +314,13 @@ def filter_out(xy):
       return int(xy[1]) != -1
    except:
       return False
+
+def getDates():
+   first = Log.objects.all().order_by("date")[0]
+   last = Log.objects.all().order_by("-date")[0]
+   returnval = (first,last)
+   return returnval
+
    
    
    
