@@ -295,20 +295,23 @@ def generate_plot(date1,date2,thetype):
    fig = plt.figure()
    ax = fig.add_subplot(1,1,1)
    ax.set_xlabel("Date",color='red')
-   ax.set_title("Title")
    yaxis = []
    if thetype == 0:
       yaxis = [o.temp for o in objects]
       ax.set_ylabel("Temperature (F)",color='red')
+      ax.set_title("Temperature Data")
    elif thetype == 1:
       yaxis = [o.ph for o in objects]
       ax.set_ylabel("ph",color='red')
+      ax.set_title("ph Data")
    elif thetype == 2:
       yaxis = [o.do for o in objects]
       ax.set_ylabel("DO",color='red')
+      ax.set_title("DO Data")
    elif thetype == 3:
       yaxis = [o.humidity for o in objects]
       ax.set_ylabel("Humidity",color='red')
+      ax.set_title("Humidity Data")
    else:
       f1 = [o.system1_food for o in objects]
       f2 = [o.system2_food for o in objects]
@@ -316,6 +319,7 @@ def generate_plot(date1,date2,thetype):
       f4 = [o.system4_food for o in objects]
       yaxis = [a+b+c+d for (a,b,c,d) in zip(f1,f2,f3,f4)]
       ax.set_ylabel("Total food for systems (g)",color='red')
+      ax.set_title("Food Usage Data")
 
 
 
