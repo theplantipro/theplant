@@ -308,7 +308,7 @@ def generate_plot(date1,date2,thetype):
       f2 = [o.system2_food for o in objects]
       f3 = [o.system3_food for o in objects]
       f4 = [o.system4_food for o in objects]
-      yaxis = [a+b+c+d for a in f1 and b in f2 and c in f3 and d in f4]
+      yaxis = [a+b+c+d for a in f1 for b in f2 for c in f3 for d in f4]
 
 
 
