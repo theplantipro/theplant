@@ -122,11 +122,11 @@ def process(request):
          else:
             if action=="temp":
                generate_plot(date1,date2,0)
-            elif: action=="ph":
+            elif action=="ph":
                generate_plot(date1,date2,1)
-            elif: action=="do":
+            elif action=="do":
                generate_plot(date1,date2,2)
-            elif: action=="humidity":
+            elif action=="humidity":
                generate_plot(date1,date2,3)
             return HttpResponseRedirect('/static/admin/files/test.png')
  
