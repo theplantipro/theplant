@@ -115,14 +115,11 @@ def process(request):
             errors.append('Starting date must be less or equal to ending date')
      
       if not errors:
-         write_to_spread(False,date1,date2)
+         write_to_spread(date1,date2)
          return HttpResponseRedirect('/static/admin/files/test.xls')
 
    return render_to_response('download.html',{'errors':errors})
 
-def allobjects(request):
-   write_to_spread(True)
-   return HttpResponseRedirect('/static/admin/files/test.xls')
 
 def dateedit(request):
    return render_to_response('dateedit.html')
@@ -214,12 +211,8 @@ def edit(request,theid):
    
 
 
-def write_to_spread(isAll,date1=None,date2=None):
-   if isAll:
-      objects = Log.objects.all().order_by("date")
-   else:
-      objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
-
+def write_to_spread(date1,date2):
+   objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
    path = '/srv/http/static/admin/files/test.xls'
 
    if os.path.exists(path):
