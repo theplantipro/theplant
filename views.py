@@ -8,7 +8,7 @@ import xlwt
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from pylab import *
+from matplotlib.ticker import FuncFormatter
 
 
 def hello(request):
@@ -310,9 +310,11 @@ def generate_plot(date1,date2,thetype):
    y_temp = [temp[1] for temp in xy_filtered]
    y = map(parse_floats,y_temp)
    fig = plt.figure()
-   locs,labels = yticks()
-   yticks(locs,map(lambda x: "%.1f" % x, locs))
    ax = fig.add_subplot(1,1,1)
+
+   ax.yaxis.set_major_formatter(FuncFormatter(lambda x,pos:('%.1f'))
+   
+
    fig.autofmt_xdate()
    plt.scatter(x,y)
    plt.savefig(path)
