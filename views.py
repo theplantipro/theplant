@@ -314,7 +314,9 @@ def generate_plot(date1,date2,thetype):
 
    dates = [o.date for o in objects]
    xy = zip(dates,yaxis)
-   xy_filtered = filter(filter_out,xy)
+   xy_filtered = xy 
+   if thetype != 4:
+      xy_filtered = filter(filter_out,xy)
    x = [temp[0] for temp in xy_filtered]
    y_temp = [temp[1] for temp in xy_filtered]
   
