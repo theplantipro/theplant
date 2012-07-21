@@ -326,7 +326,7 @@ def filter_out(xy):
 def getDates():
    first = Log.objects.all().order_by("date")[0]
    last = Log.objects.all().order_by("-date")[0]
-   returnval = (first,last)
+   returnval = (first.date,last.date)
    return returnval
 
    
