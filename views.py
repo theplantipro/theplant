@@ -294,22 +294,27 @@ def generate_plot(date1,date2,thetype):
    objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
    fig = plt.figure()
    ax = fig.add_subplot(1,1,1)
-   ax.set_xlabel("yep")
+   ax.set_xlabel("Date",color='red')
    yaxis = []
    if thetype == 0:
       yaxis = [o.temp for o in objects]
+      ax.set_ylabel("Temperature (F)")
    elif thetype == 1:
       yaxis = [o.ph for o in objects]
+      ax.set_ylabel("ph")
    elif thetype == 2:
       yaxis = [o.do for o in objects]
+      ax.set_ylabel("DO")
    elif thetype == 3:
       yaxis = [o.humidity for o in objects]
+      ax.set_ylabel("Humidity")
    else:
       f1 = [o.system1_food for o in objects]
       f2 = [o.system2_food for o in objects]
       f3 = [o.system3_food for o in objects]
       f4 = [o.system4_food for o in objects]
       yaxis = [a+b+c+d for (a,b,c,d) in zip(f1,f2,f3,f4)]
+      ax.set_ylabel("Total food for systems (g)")
 
 
 
