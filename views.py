@@ -98,6 +98,7 @@ def process(request):
    if request.method == 'GET':
       isAll = 'alldates' in request.GET.get('alldates','') 
       if isAll:
+         errors.append('test')
          datetuple = getDates()
          date1 = datetuple[0]
          date2 = datetuple[1]
