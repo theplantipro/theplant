@@ -111,7 +111,7 @@ def process(request):
          if not isAll:
             date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
             date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
-         if date2<date1:
+         if not isAll and date2<date1:
             errors.append('Starting date must be less or equal to ending date')
      
       if not errors:
