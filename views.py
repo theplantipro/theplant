@@ -270,8 +270,6 @@ def plot(request):
    return render_to_response('download.html',{'errors':errors})
 
 def generate_plot(date1,date2,thetype):
-   #date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
-   #date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
    objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
    yaxis = []
    if thetype == 0:
