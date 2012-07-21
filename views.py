@@ -103,6 +103,7 @@ def process(request):
          date2 = datetuple[1]
       date1s = request.GET.get('date1','')
       date2s = request.GET.get('date2','')
+      action = request.GET.get('action')
       if not isAll and not date1s:
          errors.append('Enter a start date')
       if not isAll and not date2s:
@@ -115,8 +116,20 @@ def process(request):
             errors.append('Starting date must be less or equal to ending date')
      
       if not errors:
-         write_to_spread(date1,date2)
-         return HttpResponseRedirect('/static/admin/files/test.xls')
+         if action=="spreadsheet":
+            write_to_spread(date1,date2)
+            return HttpResponseRedirect('/static/admin/files/test.xls')
+         else:
+            if action=="temp":
+               generate_plot(date1,date2,0)
+            elif: action=="ph":
+               generate_plot(date1,date2,1)
+            elif: action=="do":
+               generate_plot(date1,date2,2)
+            elif: action=="humidity":
+               generate_plot(date1,date2,3)
+            return HttpResponseRedirect('/static/admin/files/test.png')
+ 
 
    return render_to_response('download.html',{'errors':errors})
 
@@ -279,7 +292,7 @@ def generate_plot(date1,date2,thetype):
    objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
    yaxis = []
    if thetype == 0:
-      yaxis = [o.date for o in objects]
+      yaxis = [o.temp for o in objects]
    elif thetype == 1:
       yaxis = [o.ph for o in objects]
    elif thetype == 2:
