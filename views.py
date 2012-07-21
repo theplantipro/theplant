@@ -312,7 +312,7 @@ def generate_plot(date1,date2,thetype):
    fig = plt.figure()
    ax = fig.add_subplot(1,1,1)
 
-   ax.yaxis.set_major_formatter(FuncFormatter(lambda x,pos:('%.1f')%y))
+   ax.yaxis.set_major_formatter(FuncFormatter(lambda y,pos:('%.1f')%y))
    
 
    fig.autofmt_xdate()
