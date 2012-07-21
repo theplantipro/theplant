@@ -311,7 +311,6 @@ def generate_plot(date1,date2,thetype):
   
    y = map(parse_floats,y_temp)
    average = sum(y)/len(y)
-   plt.text(3,9,"aslkdfjalksjdf laksjd flkajs dflkasj dflkasjd flkas dftewtingg")
 
 
    fig = plt.figure()
@@ -322,6 +321,7 @@ def generate_plot(date1,date2,thetype):
 
    fig.autofmt_xdate()
    plt.scatter(x,y)
+   plt.text(3,9,"aslkdfjalksjdf laksjd flkajs dflkasj dflkasjd flkas dftewtingg")
    plt.savefig(path)
 
 def parse_floats(string):
