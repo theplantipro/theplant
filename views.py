@@ -130,6 +130,8 @@ def process(request):
                generate_plot(date1,date2,2)
             elif action=="humidity":
                generate_plot(date1,date2,3)
+            else:
+               generate_plot(date1,date2,4)
             return HttpResponseRedirect('/static/admin/files/test.png')
  
 
@@ -289,23 +291,43 @@ def generate_plot(date1,date2,thetype):
    path = '/srv/http/static/admin/files/test.png'
    if os.path.exists(path):
       os.remove(path)
-   #date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
-   #date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
    objects = Log.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
+   fig = plt.figure()
+   ax = fig.add_subplot(1,1,1)
+   ax.set_xlabel("Date",color='red')
    yaxis = []
    if thetype == 0:
       yaxis = [o.temp for o in objects]
+      ax.set_ylabel("Temperature (F)",color='red')
+      ax.set_title("Temperature Data")
    elif thetype == 1:
       yaxis = [o.ph for o in objects]
+      ax.set_ylabel("ph",color='red')
+      ax.set_title("ph Data")
    elif thetype == 2:
       yaxis = [o.do for o in objects]
+      ax.set_ylabel("DO",color='red')
+      ax.set_title("DO Data")
    elif thetype == 3:
       yaxis = [o.humidity for o in objects]
+      ax.set_ylabel("Humidity",color='red')
+      ax.set_title("Humidity Data")
+   else:
+      f1 = [o.system1_food for o in objects]
+      f2 = [o.system2_food for o in objects]
+      f3 = [o.system3_food for o in objects]
+      f4 = [o.system4_food for o in objects]
+      yaxis = [a+b+c+d for (a,b,c,d) in zip(f1,f2,f3,f4)]
+      ax.set_ylabel("Total food for systems (g)",color='red')
+      ax.set_title("Food Usage Data")
+
 
 
    dates = [o.date for o in objects]
    xy = zip(dates,yaxis)
-   xy_filtered = filter(filter_out,xy)
+   xy_filtered = xy 
+   if thetype != 4:
+      xy_filtered = filter(filter_out,xy)
    x = [temp[0] for temp in xy_filtered]
    y_temp = [temp[1] for temp in xy_filtered]
   
@@ -313,8 +335,8 @@ def generate_plot(date1,date2,thetype):
    average = sum(y)/len(y)
 
 
-   fig = plt.figure()
-   ax = fig.add_subplot(1,1,1)
+   #fig = plt.figure()
+   #ax = fig.add_subplot(1,1,1)
 
    ax.yaxis.set_major_formatter(FuncFormatter(lambda y,pos:('%.1f')%y))
    
