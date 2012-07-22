@@ -37,6 +37,9 @@ class Main_Testing(models.Model):
    end = models.ForeignKey(Single_Main, related_name='main_testing_end')
    note = models.CharField(max_length=1000)
 
+   def __unicode__(self):
+      return u'%s %s' % (self.author,self.date)
+
 class Single_Nutrient(models.Model):
    reading = models.DecimalField(max_digits=7,decimal_places=3)
    actual = models.DecimalField(max_digits=7,decimal_places=3)
@@ -55,6 +58,9 @@ class Micro_Nutrient_Testing(models.Model):
    calcium = models.ForeignKey(Single_Nutrient, related_name='micro_nutrient_calcium')
    magnesium = models.ForeignKey(Single_Nutrient, related_name='micro_nutrient_magnesium')
    note = models.CharField(max_length=1000)
+
+   def __unicode__(self):
+      return u'%s %s' % (self.author,self.date)
 
 class Ammonia_Nitrate(models.Model):
    tank1 = models.ForeignKey(Single_Nutrient, related_name='ammonia_nitrate_tank1')
