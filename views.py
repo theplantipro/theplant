@@ -14,6 +14,9 @@ from matplotlib.ticker import FuncFormatter
 def hello(request):
     return HttpResponse("Hello world")
 
+def start(request):
+   return render_to_response('start.html')
+
 def current_datetime(request):
    now = datetime.datetime.now()
    return render_to_response('current_datetime.html',{'current_date',now})

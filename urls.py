@@ -1,12 +1,13 @@
 from django.conf.urls.defaults import patterns, include, url
 from testproject.views import hello, current_datetime,search_form,search
 from testproject.views import inputs,thanks,download,process,dateedit
-from testproject.views import processdate,edit,plot
+from testproject.views import processdate,edit,plot,start
 from django.contrib import admin # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+   (r'^app/$', start),
    (r'^app/hello/$', hello),
    (r'^app/time/$',current_datetime), 
    (r'^app/search-form/$',search_form),
