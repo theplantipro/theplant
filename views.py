@@ -17,6 +17,12 @@ def hello(request):
 def start(request):
    return render_to_response('start.html')
 
+def redirect(request):
+   action = request.GET.get('action','') 
+   redi = "../%s" % action 
+   return HttpResponseRedirect(redi)
+   
+
 def current_datetime(request):
    now = datetime.datetime.now()
    return render_to_response('current_datetime.html',{'current_date',now})
