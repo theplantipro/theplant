@@ -1,5 +1,7 @@
 from django.contrib import admin
-from testproject.data_log.models import Log
+from testproject.data_log.models import Log,Single_Main,Main_Testing,Single_Nutrient
+from testproject.data_log.models import Micro_Nutrient_Testing,Ammonia_Nitrate
+from testproject.data_log.models import Ammonia_Nitrate_Testing
 
 admin.site.register(Log)
 admin.site.register(Single_Main)
