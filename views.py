@@ -155,7 +155,7 @@ def getSingleMain(l):
       if not item:
          item = -1
    sm = Single_Main(ph=l[0],temp=l[1],do=l[2],nitrate=l[3])
-   l.save()
+   sm.save()
    return sm
 
    
