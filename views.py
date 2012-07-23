@@ -94,7 +94,7 @@ def inputs(request):
    c.update({'errors':errors})
    return render_to_response('input.html',c)
 
-def inputs(request):
+def mt_inputs(request):
    return render_to_response('mt_input.html')
 
 def thanks(request):
