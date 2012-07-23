@@ -1,7 +1,8 @@
 from django.template.loader import get_template
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
-from data_log.models import Log
+from data_log.models import Log,Single_Main,Main_Testing,Single_Nutrient
+from data_log.models import Micro_Nutrient_Testing,Ammonia_Nitrate,Ammonia_Nitrate_Testing 
 from django.core.context_processors import csrf
 import datetime
 import xlwt
@@ -95,7 +96,69 @@ def inputs(request):
    return render_to_response('input.html',c)
 
 def mt_inputs(request):
+   c = {}
+   c.update(csrf(request))
+   errors=[]
+   if request.method == 'POST':
+      date=request.POST.get('date','')
+      if not date:
+         errors.append('Enter a date')
+      if not errors:
+         author=request.POST.get('author','')
+         tank11=getSingleMain(request.POST.getList('tank11','')) 
+         tank21=getSingleMain(request.POST.getList('tank21','')) 
+         tank31=getSingleMain(request.POST.getList('tank31','')) 
+         tank41=getSingleMain(request.POST.getList('tank41','')) 
+         sed1=getSingleMain(request.POST.getList('sed1','')) 
+         beg1=getSingleMain(request.POST.getList('beg1','')) 
+         end1=getSingleMain(request.POST.getList('end1','')) 
+         note1=request.POST.get('note1','')
+         tank12=getSingleMain(request.POST.getList('tank12',''))
+         tank22=getSingleMain(request.POST.getList('tank22','')) 
+         tank32=getSingleMain(request.POST.getList('tank32',''))
+         tank42=getSingleMain(request.POST.getList('tank42',''))
+         sed2=getSingleMain(request.POST.getList('sed2',''))
+         beg2=getSingleMain(request.POST.getList('beg2',''))
+         end2=getSingleMain(request.POST.getList('end2',''))
+         note2=request.POST.get('note2','')
+         mt1 = Main_Testing(system=1,
+                              date=date,
+                              author=author,
+                              tank1=tank11,
+                              tank2=tank21,
+                              tank3=tank31,
+                              tank4=tank41,
+                              sed=sed1,
+                              beg=beg1,
+                              end=end1,
+                              note=note1)
+         mt2 = Main_Testing(system=2,
+                              date=date,
+                              author=author,
+                              tank1=tank12,
+                              tank2=tank22,
+                              tank3=tank32,
+                              tank4=tank42,
+                              sed=sed2,
+                              beg=beg2,
+                              end=end2,
+                              note=note2)
+
+         mt1.save()
+         mt2.save()
+         return HttpResponseRedirect('thanks/')
+   c.update({'errors':errors})
    return render_to_response('mt_input.html')
+
+def getSingleMain(l):
+   for item in l:
+      if not item:
+         item = -1
+   sm = Single_Main(ph=l[0],temp=l[1],do=l[2],nitrate=l[3])
+   l.save()
+   return sm
+
+   
 
 def thanks(request):
    c = {}
