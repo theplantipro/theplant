@@ -1,0 +1,33 @@
+<html>
+   <head>
+      <title>Data input</title>
+   </head>
+
+<body>
+   <h1>Data input</h1>
+
+   {% if errors %}
+      <ul>
+         {% for error in errors %}
+         <li>{{ error }}</li>
+         {% endfor %}
+      </ul>
+   {% endif %}
+
+   <form action="" method="post">{% csrf_token %}
+      <p>Date: <input type="date" name="date"></p>
+      <p>Author: <input type="text" name="author"></p>
+      <p>System 1 food (g): <input type="number" step="any" name="sys1"></p>
+      <p>System 2 food (g): <input type="number" step="any"name="sys2"></p>
+      <p>System 3 food (g): <input type="number" step="any"name="sys3"></p>
+      <p>System 4 food (g): <input type="number" step="any"name="sys4"></p>
+      <p>Makeup: <input type="text" name="makeup"></p>
+      <p>Temperature: <input type="number" step="any"name="temp"></p>
+      <p>ph: <input type="number" step="any"name="ph"></p>
+      <p>DO: <input type="number" step="any"name="do"></p>
+      <p>Humidity: <input type="number" step="any"name="humid"></p>
+      <p>Note: <input type="text" name="note"></p>
+      <input type="submit" value="Submit">
+   </form>
+</body>
+</html>
