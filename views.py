@@ -148,7 +148,7 @@ def mt_inputs(request):
          mt2.save()
          return HttpResponseRedirect('thanks/')
    c.update({'errors':errors})
-   return render_to_response('mt_input.html')
+   return render_to_response('mt_input.html',c)
 
 def getSingleMain(l):
    for item in l:
