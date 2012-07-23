@@ -17,14 +17,15 @@
    <form action="" method="post">{% csrf_token %}
       <p>Date: <input type="date" name="date"></p>
       <p>Author: <input type="text" name="author"></p>
-      <table>
+      <table style="border:1px solid gray">
          <tr>
             <td></td><td>pH</td><td>Temp (F)</td><td>DO (mg/L)</td><td>Nitrate (mg/L)</td>
          </tr>
          <tr>
             <th>System 1</th>
          </tr>
-         <br>
+         <tr>
+         </tr>
          <tr>
             <th>Tank 1</th>
             <td><input type="number" step="any" name="tank11_ph"/></td>
@@ -71,7 +72,8 @@
          <tr>
             <th>System 2</th>
          </tr>
-         <br>
+         <tr>
+         </tr>
          <tr>
             <th>Tank 1</th>
             <td><input type="number" step="any" name="tank12_ph"/></td>
