@@ -151,9 +151,9 @@ def mt_inputs(request):
    return render_to_response('mt_input.html',c)
 
 def getSingleMain(l):
-   for item in l:
-      if not item or item == '':
-         item = -1
+   for i in xrange(len(l)):
+      if not l[i] or l[i] == '':
+         l[i] = -1
    sm = Single_Main(ph=l[0],temp=l[1],do=l[2],nitrate=l[3])
    sm.save()
    return sm
