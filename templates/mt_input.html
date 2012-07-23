@@ -17,16 +17,48 @@
    <form action="" method="post">{% csrf_token %}
       <p>Date: <input type="date" name="date"></p>
       <p>Author: <input type="text" name="author"></p>
-      <p>System 1 food (g): <input type="number" step="any" name="sys1"></p>
-      <p>System 2 food (g): <input type="number" step="any"name="sys2"></p>
-      <p>System 3 food (g): <input type="number" step="any"name="sys3"></p>
-      <p>System 4 food (g): <input type="number" step="any"name="sys4"></p>
-      <p>Makeup: <input type="text" name="makeup"></p>
-      <p>Temperature: <input type="number" step="any"name="temp"></p>
-      <p>ph: <input type="number" step="any"name="ph"></p>
-      <p>DO: <input type="number" step="any"name="do"></p>
-      <p>Humidity: <input type="number" step="any"name="humid"></p>
-      <p>Note: <input type="text" name="note"></p>
+      <table>
+         <tr>
+            <td>pH</td><td>Temp (F)</td><td>DO (mg/L)</td><td>Nitrate (mg/L)</td>
+         </tr>
+         <tr>
+            <th>System 1</th>
+         </tr>
+         <tr>
+            <th>Tank 1</th>
+            <td><input type="number" step="any" name="tank11"/></td>
+            <th>Tank 2</th>
+            <td><input type="number" step="any" name="tank21"/></td>
+            <th>Tank 3</th>
+            <td><input type="number" step="any" name="tank31"/></td>
+            <th>Tank 4</th>
+            <td><input type="number" step="any" name="tank41"/></td>
+            <th>Sediment Tank</th>
+            <td><input type="number" step="any" name="sed1"/></td>
+            <th>Beginning Bed</th>
+            <td><input type="number" step="any" name="beg1"/></td>
+            <th>End Bed</th>
+            <td><input type="number" step="any" name="end1"/></td>
+         </tr>
+         <tr>
+            <th>System 1</th>
+         </tr>
+         <tr>
+            <th>Tank 1</th>
+            <td><input type="number" step="any" name="tank12"/></td>
+            <th>Tank 2</th>
+            <td><input type="number" step="any" name="tank22"/></td>
+            <th>Tank 3</th>
+            <td><input type="number" step="any" name="tank32"/></td>
+            <th>Tank 4</th>
+            <td><input type="number" step="any" name="tank42"/></td>
+            <th>Sediment Tank</th>
+            <td><input type="number" step="any" name="sed2"/></td>
+            <th>Beginning Bed</th>
+            <td><input type="number" step="any" name="beg2"/></td>
+            <th>End Bed</th>
+            <td><input type="number" step="any" name="end2"/></td>
+         </tr>
       <input type="submit" value="Submit">
    </form>
 </body>
