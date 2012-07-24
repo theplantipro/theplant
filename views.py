@@ -105,23 +105,16 @@ def mt_inputs(request):
          errors.append('Enter a date')
       if not errors:
          author=request.POST.get('author','')
-         tank11=getSingleMain(request.POST.getlist('tank11','')) 
-         tank21=getSingleMain(request.POST.getlist('tank21','')) 
-         tank31=getSingleMain(request.POST.getlist('tank31','')) 
-         tank41=getSingleMain(request.POST.getlist('tank41','')) 
-         sed1=getSingleMain(request.POST.getlist('sed1','')) 
-         beg1=getSingleMain(request.POST.getlist('beg1','')) 
-         end1=getSingleMain(request.POST.getlist('end1','')) 
-         note1=request.POST.get('note1','')
-         tank12=getSingleMain(request.POST.getlist('tank12',''))
-         tank22=getSingleMain(request.POST.getlist('tank22','')) 
-         tank32=getSingleMain(request.POST.getlist('tank32',''))
-         tank42=getSingleMain(request.POST.getlist('tank42',''))
-         sed2=getSingleMain(request.POST.getlist('sed2',''))
-         beg2=getSingleMain(request.POST.getlist('beg2',''))
-         end2=getSingleMain(request.POST.getlist('end2',''))
-         note2=request.POST.get('note2','')
-         mt1 = Main_Testing(system=1,
+         system=request.POST.get('system','')
+         tank1=getSingleMain(request.POST.getlist('tank1','')) 
+         tank2=getSingleMain(request.POST.getlist('tank2','')) 
+         tank3=getSingleMain(request.POST.getlist('tank3','')) 
+         tank4=getSingleMain(request.POST.getlist('tank4','')) 
+         sed=getSingleMain(request.POST.getlist('sed','')) 
+         beg=getSingleMain(request.POST.getlist('beg','')) 
+         end=getSingleMain(request.POST.getlist('end','')) 
+         note=request.POST.get('note','')
+         mt = Main_Testing(system=system,
                               date=date,
                               author=author,
                               tank1=tank11,
@@ -132,20 +125,8 @@ def mt_inputs(request):
                               beg=beg1,
                               end=end1,
                               note=note1)
-         mt2 = Main_Testing(system=2,
-                              date=date,
-                              author=author,
-                              tank1=tank12,
-                              tank2=tank22,
-                              tank3=tank32,
-                              tank4=tank42,
-                              sed=sed2,
-                              beg=beg2,
-                              end=end2,
-                              note=note2)
 
-         mt1.save()
-         mt2.save()
+         mt.save()
          return HttpResponseRedirect('thanks/')
    c.update({'errors':errors})
    return render_to_response('mt_input.html',c)
