@@ -267,9 +267,9 @@ def processdate(request):
       action = request.GET.get('action','')
       date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
       objects = []
-      if action == "log" 
+      if action == "log": 
          objects = Log.objects.filter(date=date1)
-      elif action == "main_testing" 
+      elif action == "main_testing": 
          objects = Main_Testing.objects.filter(date=date1)
       return render_to_response('processdate.html',{'date_list':objects})
 
