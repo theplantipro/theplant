@@ -546,8 +546,8 @@ def filter_out(xy):
       return False
 
 def getDates():
-   first = Main_Testing.objects.all().order_by("date")[0]
-   last = Main_Testing.objects.all().order_by("-date")[0]
+   first = Log.objects.all().order_by("date")[0]
+   last = Log.objects.all().order_by("-date")[0]
    returnval = (first.date,last.date)
    return returnval
 
