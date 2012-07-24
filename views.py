@@ -406,8 +406,7 @@ def mt_write_to_spread(date1,date2):
    wbk = xlwt.Workbook()
    sheet = wbk.add_sheet('sheet 1')
     
-   i=1
-   offset = 0
+   i=0
    for obj in objects:
       sheet.write(i,0,'Date')
       sheet.write(i+1,0,'Name')
@@ -436,7 +435,7 @@ def mt_write_to_spread(date1,date2):
       mt_write_row(i+10,1,obj.beg,sheet)
       mt_write_row(i+11,1,obj.end,sheet)
       sheet.write(i+12,1,obj.note)
-      i=i+10
+      i=i+12
       
    wbk.save(path)
 
