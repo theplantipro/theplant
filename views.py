@@ -427,15 +427,15 @@ def mt_write_to_spread(date1,date2):
       sheet.write(i+2,3,'DO (mg/L)')
       sheet.write(i+2,4,'Nitrate (mg/L')
       sheet.write(i+3,1,obj.system)
-      mt_write_row(i+5,1,obj.tank1,sheet)
-      mt_write_row(i+6,1,obj.tank2,sheet)
-      mt_write_row(i+7,1,obj.tank3,sheet)
-      mt_write_row(i+8,1,obj.tank4,sheet)
-      mt_write_row(i+9,1,obj.sed,sheet)
-      mt_write_row(i+10,1,obj.beg,sheet)
-      mt_write_row(i+11,1,obj.end,sheet)
-      sheet.write(i+12,1,obj.note)
-      i=i+12
+      mt_write_row(i+4,1,obj.tank1,sheet)
+      mt_write_row(i+5,1,obj.tank2,sheet)
+      mt_write_row(i+6,1,obj.tank3,sheet)
+      mt_write_row(i+7,1,obj.tank4,sheet)
+      mt_write_row(i+8,1,obj.sed,sheet)
+      mt_write_row(i+9,1,obj.beg,sheet)
+      mt_write_row(i+10,1,obj.end,sheet)
+      sheet.write(i+11,1,obj.note)
+      i=i+13
       
    wbk.save(path)
 
