@@ -25,7 +25,7 @@ urlpatterns = patterns('',
    (r'^app/dateedit/processdate/$',processdate),
    (r'^app/dateedit/processdate/(\d+)/edit/$',edit),
    (r'^app/dateedit/processdate/\d+/edit/thanks/$',thanks),
-   (r'^app/dateedit/processdate/(\d+)/mt_edit/$',edit),
+   (r'^app/dateedit/processdate/(\d+)/mt_edit/$',mt_edit),
    (r'^app/dateedit/processdate/\d+/mt_edit/thanks/$',thanks),
    (r'^app/admin/',include(admin.site.urls)),
     # Examples:
