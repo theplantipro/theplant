@@ -131,6 +131,70 @@ def mt_inputs(request):
    c.update({'errors':errors})
    return render_to_response('mt_input.html',c)
 
+def mt_edit(request,theid):
+   c = {}
+   c.update(csrf(request))
+   errors=[]
+   if request.method == 'POST':
+      date=request.POST.get('date','')
+      if not date:
+         errors.append('Enter a date')
+      if not errors:
+         author=request.POST.get('author','')
+         system=request.POST.get('system','')
+         tank1=getSingleMain(request.POST.getlist('tank1','')) 
+         tank2=getSingleMain(request.POST.getlist('tank2','')) 
+         tank3=getSingleMain(request.POST.getlist('tank3','')) 
+         tank4=getSingleMain(request.POST.getlist('tank4','')) 
+         sed=getSingleMain(request.POST.getlist('sed','')) 
+         beg=getSingleMain(request.POST.getlist('beg','')) 
+         end=getSingleMain(request.POST.getlist('end','')) 
+         note=request.POST.get('note','')
+
+         mt  = Main_Testing.objects.filter(id=int(theid))[0]
+         mt.author = author
+         mt.system=system
+         mt.date=date
+         mt.tank1=tank1
+         mt.tank2=tank2
+         mt.tank3=tank3
+         mt.tank4=tank4
+         mt.sed=sed
+         mt.beg=beg
+         mt.end=end
+         mt.note=note
+
+         mt.save()
+         return HttpResponseRedirect('thanks/')
+   else:
+      maint = Main_Testing.objects.filter(id=int(theid))[0]
+      maint.tank1 = checkBlank(maint.tank1)
+      maint.tank2 = checkBlank(maint.tank2)
+      maint.tank3 = checkBlank(maint.tank3)
+      maint.tank4 = checkBlank(maint.tank4)
+      maint.sed = checkBlank(maint.sed)
+      maint.beg = checkBlank(maint.beg)
+      maint.end = checkBlank(maint.end)
+      log.date = str(log.date)
+    
+      c.update({'mt':maint})
+      return render_to_response('mt_edit.html',c)
+
+   c.update({'errors':errors})
+   return render_to_response('mt_input.html',c)
+
+def checkBlank(l):
+   if l.ph== -1:
+      l.ph= '' 
+   if l.temp== -1:
+      l.temp= '' 
+   if l.do== -1:
+      l.do = '' 
+   if l.nitrate== -1:
+      l.nitrate= '' 
+   return l
+   
+
 def getSingleMain(l):
    for i in xrange(len(l)):
       if not l[i] or l[i] == '':
