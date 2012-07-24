@@ -175,7 +175,7 @@ def mt_edit(request,theid):
       maint.sed = checkBlank(maint.sed)
       maint.beg = checkBlank(maint.beg)
       maint.end = checkBlank(maint.end)
-      log.date = str(log.date)
+      maint.date = str(maint.date)
     
       c.update({'mt':maint})
       return render_to_response('mt_edit.html',c)
