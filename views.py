@@ -241,6 +241,9 @@ def process(request):
          if action=="spreadsheet":
             write_to_spread(date1,date2)
             return HttpResponseRedirect('/static/admin/files/test.xls')
+         elif action=="mt_spreadsheet":
+            mt_write_to_spread(date1,date2)
+            return HttpResponseRedirect('/static/admin/files/test.xls')
          else:
             if action=="temp":
                generate_plot(date1,date2,0)
