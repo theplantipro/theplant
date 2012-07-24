@@ -393,6 +393,55 @@ def write_to_spread(date1,date2):
       i=i+1
    wbk.save(path)
 
+def mt_write_to_spread(date1,date2):
+   objects = Main_Testing.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
+   path = '/srv/http/static/admin/files/test.xls'
+
+   if os.path.exists(path):
+      os.remove(path)
+   
+   wbk = xlwt.Workbook()
+   sheet = wbk.add_sheet('sheet 1')
+   sheet.write(0,0,'Date')
+   sheet.write(1,0,'Name')
+   sheet.write(3,0,'System')
+   sheet.write(4,0,'Tank 1')
+   sheet.write(5,0,'Tank 2')
+   sheet.write(6,0,'Tank 3')
+   sheet.write(7,0,'Tank 4')
+   sheet.write(8,0,'Sediment Tank')
+   sheet.write(9,0,'Beginning Bed')
+   sheet.write(10,0,'End Bed')
+   sheet.write(11,0,'Note')
+    
+   i=1
+   offset = 0
+   for obj in objects:
+      sheet.write(0,i,obj.date.strftime('%m/%d/%Y'))
+      sheet.write(1,i,obj.author)
+      sheet.write(2,i,'pH')
+      sheet.write(3,i+1,'Temp (F)')
+      sheet.write(3,i+2,'DO (mg/L)')
+      sheet.write(3,i+3,'Nitrate (mg/L')
+      sheet.write(4,i,obj.system)
+      mt_write_row(5,i,obj.tank1,sheet)
+      mt_write_row(6,i,obj.tank2,sheet)
+      mt_write_row(7,i,obj.tank3,sheet)
+      mt_write_row(8,i,obj.tank4,sheet)
+      mt_write_row(9,i,obj.sed,sheet)
+      mt_write_row(10,i,obj.beg,sheet)
+      mt_write_row(11,i,obj.end,sheet)
+      sheet.write(12,i,obj.note)
+      i=i+4
+   wbk.save(path)
+
+def mt_write_row(row,column,obj,sheet):
+   sheet.write(row,column,'' if obj.ph == -1 else obj.ph)
+   sheet.write(row,column+1,'' if obj.temp == -1 else obj.temp)
+   sheet.write(row,column+2,'' if obj.do == -1 else obj.do)
+   sheet.write(row,column+3,'' if obj.nitrate == -1 else obj.nitrate)
+   
+
 def plot(request):
    errors=[]
    if request.method == 'GET':
