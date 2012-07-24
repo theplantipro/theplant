@@ -6,7 +6,8 @@ from data_log.models import Micro_Nutrient_Testing,Ammonia_Nitrate,Ammonia_Nitra
 from django.core.context_processors import csrf
 import datetime
 import xlwt
-import os
+import os,tempfile
+os.environ['MPLCONFIGDIR']=tempfile.mkdtemp()
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 
