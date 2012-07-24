@@ -117,14 +117,14 @@ def mt_inputs(request):
          mt = Main_Testing(system=system,
                               date=date,
                               author=author,
-                              tank1=tank11,
-                              tank2=tank21,
-                              tank3=tank31,
-                              tank4=tank41,
-                              sed=sed1,
-                              beg=beg1,
-                              end=end1,
-                              note=note1)
+                              tank1=tank1,
+                              tank2=tank2,
+                              tank3=tank3,
+                              tank4=tank4,
+                              sed=sed,
+                              beg=beg,
+                              end=end,
+                              note=note)
 
          mt.save()
          return HttpResponseRedirect('thanks/')

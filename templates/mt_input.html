@@ -15,15 +15,12 @@
    {% endif %}
 
    <form action="" method="post">{% csrf_token %}
-      <p>Date: <input type="date" name="date"></p>
-      <p>Author: <input type="text" name="author"></p>
+      <p>Date: <input type="date" name="date"/></p>
+      <p>Author: <input type="text" name="author"/></p>
+      <p>System #:<input type="number" name="system"/></p>
       <table style="border:1px solid gray">
          <tr>
             <td></td><td>pH</td><td>Temp (F)</td><td>DO (mg/L)</td><td>Nitrate (mg/L)</td>
-         </tr>
-         <tr>
-            <th>System #</th>
-            <td><input type="number" name="system"/></td>
          </tr>
          <tr><p></p>
          </tr>
