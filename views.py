@@ -7,7 +7,6 @@ from django.core.context_processors import csrf
 import datetime
 import xlwt
 import os
-import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 
