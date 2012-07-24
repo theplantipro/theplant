@@ -264,8 +264,13 @@ def dateedit(request):
 def processdate(request):
    if request.method == 'GET':
       date1s = request.GET.get('date1','')
+      action = request.GET.get('action','')
       date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
-      objects = Log.objects.filter(date=date1)
+      objects = []
+      if action == "log" 
+         objects = Log.objects.filter(date=date1)
+      elif action == "main_testing" 
+         objects = Main_Testing.objects.filter(date=date1)
       return render_to_response('processdate.html',{'date_list':objects})
 
 def edit(request,theid):
