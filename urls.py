@@ -1,25 +1,32 @@
 from django.conf.urls.defaults import patterns, include, url
 from theplant.views import hello, current_datetime,search_form,search
-from theplant.views import inputs,thanks,download,process,allobjects,dateedit
-from theplant.views import processdate,edit
+from theplant.views import inputs,thanks,download,process,dateedit
+from theplant.views import processdate,edit,plot,start,redirect, mt_inputs
+from theplant.views import mt_edit 
 from django.contrib import admin # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+   (r'^app/$', start),
    (r'^app/hello/$', hello),
+   (r'^app/redirect/$', redirect),
    (r'^app/time/$',current_datetime), 
    (r'^app/search-form/$',search_form),
    (r'^app/search/$',search),
    (r'^app/inputs/$',inputs),
    (r'^app/inputs/thanks/$',thanks),
+   (r'^app/mt_inputs/$',mt_inputs),
+   (r'^app/mt_inputs/thanks/$',thanks),
    (r'^app/download/$',download),
    (r'^app/download/process/$',process),
-   (r'^app/download/allobjects/$',allobjects),
+   #(r'^app/download/process/$',plot),
    (r'^app/dateedit/$',dateedit),
    (r'^app/dateedit/processdate/$',processdate),
    (r'^app/dateedit/processdate/(\d+)/edit/$',edit),
    (r'^app/dateedit/processdate/\d+/edit/thanks/$',thanks),
+   (r'^app/dateedit/processdate/(\d+)/mt_edit/$',mt_edit),
+   (r'^app/dateedit/processdate/\d+/mt_edit/thanks/$',thanks),
    (r'^app/admin/',include(admin.site.urls)),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),

@@ -17,10 +17,17 @@
    <form action="/app/download/process" method="get">
       <p>Date: <input type="date" name="date1"></p>
       <p>Date: <input type="date" name="date2"></p>
+      <input type="checkbox" name="alldates">Get All Entries</input>
+      <select name="action">
+         <option value="spreadsheet">Export to spreadsheet</option>
+         <option value="mt_spreadsheet">Export to main testing spreadsheet</option>
+         <option value="temp">Temperature Stats</option>
+         <option value="ph">ph Stats</option>
+         <option value="do">do Stats</option>
+         <option value="humidity">Humidity Stats</option>
+         <option value="food">Food Stats</option>
+      </select>
       <input type="submit" value="Submit"/>
-   </form>
-   <form action="/app/download/allobjects" method="get">
-      <input type="submit" value="Get all entries"/>
    </form>
    
 </body>
