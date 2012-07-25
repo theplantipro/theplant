@@ -588,7 +588,7 @@ def mt_generate_plot(date1,date2,system,where,thetype):
    elif where=="beg":
       objects = [o.beg for o in objects]   
    elif where=="end":
-      objects = [o.endfor o in objects]   
+      objects = [o.end for o in objects]   
    else:
       obj = []
       obj.extend([o.tank1 for o in objects])
