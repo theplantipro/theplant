@@ -4,6 +4,7 @@ from testproject.views import inputs,thanks,download,process,dateedit
 from testproject.views import processdate,edit,plot,start,redirect, mt_inputs
 from testproject.views import mt_edit,mt_download,mt_process,mn_inputs, mn_edit
 from testproject.views import mn_process,mn_download,am_inputs,am_edit,am_download,am_process
+from testproject.views import mt_processdate,mn_processdate,am_processdate
 from django.contrib import admin # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 admin.autodiscover()
@@ -34,14 +35,17 @@ urlpatterns = patterns('',
    #(r'^app/download/process/$',plot),
    (r'^app/dateedit/$',dateedit),
    (r'^app/dateedit/processdate/$',processdate),
+   (r'^app/dateedit/mt_processdate/$',mt_processdate),
+   (r'^app/dateedit/mn_processdate/$',mn_processdate),
+   (r'^app/dateedit/am_processdate/$',am_processdate),
    (r'^app/dateedit/processdate/(\d+)/edit/$',edit),
    (r'^app/dateedit/processdate/\d+/edit/thanks/$',thanks),
-   (r'^app/dateedit/processdate/(\d+)/mt_edit/$',mt_edit),
-   (r'^app/dateedit/processdate/\d+/mt_edit/thanks/$',thanks),
-   (r'^app/dateedit/processdate/(\d+)/mn_edit/$',mn_edit),
-   (r'^app/dateedit/processdate/\d+/mn_edit/thanks/$',thanks),
-   (r'^app/dateedit/processdate/(\d+)/am_edit/$',am_edit),
-   (r'^app/dateedit/processdate/\d+/am_edit/thanks/$',thanks),
+   (r'^app/dateedit/mt_processdate/(\d+)/mt_edit/$',mt_edit),
+   (r'^app/dateedit/mt_processdate/\d+/mt_edit/thanks/$',thanks),
+   (r'^app/dateedit/mn_processdate/(\d+)/mn_edit/$',mn_edit),
+   (r'^app/dateedit/mn_processdate/\d+/mn_edit/thanks/$',thanks),
+   (r'^app/dateedit/am_processdate/(\d+)/am_edit/$',am_edit),
+   (r'^app/dateedit/am_processdate/\d+/am_edit/thanks/$',thanks),
    (r'^app/admin/',include(admin.site.urls)),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),

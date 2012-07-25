@@ -599,20 +599,32 @@ def processdate(request):
       date1s = request.GET.get('date1','')
       action = request.GET.get('action','')
       date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
-      objects = []
-      if action == "log": 
-         objects = Log.objects.filter(date=date1)
-         return render_to_response('processdate.html',{'date_list':objects})
-      elif action == "main_testing": 
-         objects = Main_Testing.objects.filter(date=date1)
-         return render_to_response('mt_processdate.html',{'date_list':objects})
-      elif action == "micro_nutrient_testing": 
-         objects = Micro_Nutrient_Testing.objects.filter(date=date1)
-         return render_to_response('mn_processdate.html',{'date_list':objects})
-      elif action == "ammonia_nitrate_testing":
-         objects = Ammonia_Nitrate_Testing.objects.filter(date=date1)
-         return render_to_response('am_processdate.html',{'date_list':objects})
+      objects = Log.objects.filter(date=date1)
       return render_to_response('processdate.html',{'date_list':objects})
+
+def mt_processdate(request):
+   if request.method == 'GET':
+      date1s = request.GET.get('date1','')
+      action = request.GET.get('action','')
+      date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+      objects = Main_Testing.objects.filter(date=date1)
+      return render_to_response('mt_processdate.html',{'date_list':objects})
+
+def mn_processdate(request):
+   if request.method == 'GET':
+      date1s = request.GET.get('date1','')
+      action = request.GET.get('action','')
+      date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+      objects = Micro_Nutrient_Testing.objects.filter(date=date1)
+      return render_to_response('mn_processdate.html',{'date_list':objects})
+
+def am_processdate(request):
+   if request.method == 'GET':
+      date1s = request.GET.get('date1','')
+      action = request.GET.get('action','')
+      date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+      objects = Ammonia_Nitrate_Testing.objects.filter(date=date1)
+      return render_to_response('am_processdate.html',{'date_list':objects})
 
 def edit(request,theid):
    c = {}
