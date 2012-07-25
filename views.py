@@ -849,7 +849,7 @@ def mn_generate_plot(date1,date2,system,thetype):
    ax = fig.add_subplot(1,1,1)
    ax.set_xlabel("Date",color='red')
    yaxis_a = [o.actual for o in objects]
-   yaxis_r = [o.readingfor o in objects]
+   yaxis_r = [o.reading for o in objects]
    ax.set_ylabel("ppm",color='red')
 
    d = {'nitrate':'Nitrate Data','phosphorus':'Phosphorus Data','potassium':'Potassium Data','ammonia':'Ammonia Data','sulfate':'Sulfate Data','calcium':'Calcium Data','magnesium':'Magnesium Data','1':'System 1','2':'System 2'}
