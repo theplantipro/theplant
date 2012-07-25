@@ -842,7 +842,7 @@ def am_write_to_spread(date1,date2):
 
       sheet.write(i+0,1,obj.date.strftime('%m/%d/%Y'))
       sheet.write(i+1,1,obj.author)
-      sheet.write_merge(i+2,i+2,1,2,'Nitrate')
+      sheet.write_merge(i+2,i+2,1,2,'Nitrate',style=style1)
       sheet.write_merge(i+2,i+2,3,4,'Ammonia')
       sheet.write_merge(i+3,1,'Measure ppm')
       sheet.write_merge(i+3,2,'Actual ppm')
