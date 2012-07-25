@@ -335,7 +335,7 @@ def am_edit(request,theid):
          am.save()
          return HttpResponseRedirect('thanks/')
    else:
-      amm = Micro_Nutrient_Testing.objects.filter(id=int(theid))[0]
+      amm = Ammonia_Nitrate_Testing.objects.filter(id=int(theid))[0]
       amm.nitrate = am_checkBlank(amm.nitrate)
       am.ammonia = am_checkBlank(amm.ammonia)
       amm.date = str(amm.date)
