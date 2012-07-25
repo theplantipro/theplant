@@ -1,10 +1,10 @@
 <html>
    <head>
-      <title>Get Data</title>
+      <title>Get Ammonia Nitrate Testing Data</title>
    </head>
 
 <body>
-   <h1>Get Data</h1>
+   <h1>Get Ammonia Nitrate Testing Data</h1>
 
    {% if errors %}
       <ul>
@@ -15,10 +15,15 @@
    {% endif %}
 
    <form action="/app/download/am_process" method="get">
-      <p>Date: <input type="date" name="date1"></p>
-      <p>Date: <input type="date" name="date2"></p>
+      <p><b>Select Date Range</b></p>
+      <p>Start Date: <input type="date" name="date1"></p>
+      <p>End Date: <input type="date" name="date2"></p>
       <input type="checkbox" name="alldates">Get All Entries</input>
-      <input type="checkbox" name="export">Export to Spreadsheet</input>
+      <p></p>
+      <p><b>Spreadsheet</b></p>
+      <input type="submit" name="Export to Spreadsheet"></input>
+      <p></p>
+      <p><b>Get Plot</b></p>
       <select name="system">
          <option value=1>System 1</option>
          <option value=2>System 2</option>
@@ -39,7 +44,5 @@
    
       <input type="submit" value="Submit"/>
    </form>
-   
-   
 </body>
 </html>
