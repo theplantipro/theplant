@@ -607,7 +607,7 @@ def mt_generate_plot(date1,date2,system,where,thetype):
    if thetype == "temp":
       yaxis = [o.temp for o in objects]
       ax.set_ylabel("Temperature (F)",color='red')
-   elif thetype == "pH":
+   elif thetype == "ph":
       yaxis = [o.ph for o in objects]
       ax.set_ylabel("ph",color='red')
    elif thetype == "do":
@@ -618,7 +618,7 @@ def mt_generate_plot(date1,date2,system,where,thetype):
       yaxis = [o.nitrate for o in objects]
       ax.set_ylabel("Nitrate (mg/L)",color='red')
 
-   d = {'pH':'pH Data','do':'DO Data','nitrate':'Nitrate Data','temp':'Temperature Data',1:'System 1',2:'System 2',3:'System 1 and 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sediment Tank','beg':'Beginning Bed','end':'End Bed','all':'All Tanks and Beds'}
+   d = {'ph':'pH Data','do':'DO Data','nitrate':'Nitrate Data','temp':'Temperature Data',1:'System 1',2:'System 2',3:'System 1 and 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sediment Tank','beg':'Beginning Bed','end':'End Bed','all':'All Tanks and Beds'}
 
    ax.set_title("%s for %s in %s" % d[thetype],d[where],d[system])
 
