@@ -600,8 +600,7 @@ def mt_generate_plot(date1,date2,system,where,thetype):
       tupsy.extend([(o.sed,o.date) for o in objects])
       tupsy.extend([(o.beg,o.date) for o in objects])
       tupsy.extend([(o.end,o.date) for o in objects])
-      #tups = unzip([(t,da) for tup in tupsy])
-      tups = unzip(tupsy)
+      tups = unzip([(t,da) for tup in tupsy])
    dates = tups[1]
    objects = tups[0]
 
