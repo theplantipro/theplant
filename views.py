@@ -775,6 +775,56 @@ def mn_write_to_spread(date1,date2):
       
    wbk.save(path)
 
+def mn_write_to_spread(date1,date2):
+   objects = Ammonia_Nitrate_Testing.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
+   path = '/srv/http/static/admin/files/test.xls'
+
+   if os.path.exists(path):
+      os.remove(path)
+   
+   wbk = xlwt.Workbook()
+   sheet = wbk.add_sheet('sheet 1')
+    
+   i=0
+   for obj in objects:
+      sheet.write(i,0,'Date')
+      sheet.write(i+1,0,'Name')
+      sheet.write(i+3,0,'System')
+      sheet.write(i+4,0,'Tank 1')
+      sheet.write(i+5,0,'Tank 2')
+      sheet.write(i+6,0,'Tank 3')
+      sheet.write(i+7,0,'Tank 4')
+      sheet.write(i+8,0,'Sediment Tank')
+      sheet.write(i+9,0,'Beginning Bed')
+      sheet.write(i+10,0,'End Bed')
+      sheet.write(i+11,0,'Comment')
+
+      sheet.write(i+0,1,obj.date.strftime('%m/%d/%Y'))
+      sheet.write(i+1,1,obj.author)
+      sheet.write_merge(i+2,i+2,1,2,'Nitrate')
+      sheet.write_merge(i+2,i+2,3,4,'Ammonia')
+      sheet.write_merge(i+3,1,'Measure ppm')
+      sheet.write_merge(i+3,2,'Actual ppm')
+      sheet.write_merge(i+3,3,'Measure ppm')
+      sheet.write_merge(i+3,4,'Actual ppm')
+      am_write_row(i+4,1,obj.nitrate.tank1,obj.ammonia.tank1,sheet)
+      am_write_row(i+5,1,obj.nitrate.tank2,obj.ammonia.tank2,sheet)
+      am_write_row(i+6,1,obj.nitrate.tank3,obj.ammonia.tank3,sheet)
+      am_write_row(i+7,1,obj.nitrate.tank4,obj.ammonia.tank4,sheet)
+      am_write_row(i+8,1,obj.nitrate.sed,obj.ammonia.sed,sheet)
+      am_write_row(i+9,1,obj.nitrate.beg,obj.ammonia.beg,sheet)
+      am_write_row(i+10,1,obj.nitrate.end,obj.ammonia.end,sheet)
+      sheet.write(i+11,1,obj.note)
+      i=i+13
+      
+   wbk.save(path)
+
+def am_write_row(row,column,obj,obj2,sheet):
+   sheet.write(row,column,'' if obj.reading== -1 else obj.reading)
+   sheet.write(row,column+1,'' if obj.actual== -1 else obj.actual)
+   sheet.write(row,column+2,'' if obj2.reading== -1 else obj2.reading)
+   sheet.write(row,column+3,'' if obj2.actual== -1 else obj2.actual)
+
 def mt_write_row(row,column,obj,sheet):
    sheet.write(row,column,'' if obj.ph == -1 else obj.ph)
    sheet.write(row,column+1,'' if obj.temp == -1 else obj.temp)
