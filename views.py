@@ -170,6 +170,32 @@ def mn_inputs(request):
    c.update({'errors':errors})
    return render_to_response('mn_input.html',c)
 
+def am_inputs(request):
+   c = {}
+   c.update(csrf(request))
+   errors=[]
+   if request.method == 'POST':
+      date=request.POST.get('date','')
+      if not date:
+         errors.append('Enter a date')
+      if not errors:
+         author=request.POST.get('author','')
+         system=request.POST.get('system','')
+         nitrate=getAmmoniaNitrate(request.POST.getlist('n','')) 
+         ammonia=getAmmoniaNitrate(request.POST.getlist('a','')) 
+         note=request.POST.get('note','')
+         mnt = Ammonia_Nitrate_Testing(system=system,
+                              date=date,
+                              author=author,
+                              nitrate=nitrate,
+                              ammonia=ammonia,
+                              note=note)
+
+         mnt.save()
+         return HttpResponseRedirect('thanks/')
+   c.update({'errors':errors})
+   return render_to_response('am_input.html',c)
+
 def mt_edit(request,theid):
    c = {}
    c.update(csrf(request))
@@ -316,6 +342,21 @@ def getSingleNutrient(l):
    sn = Single_Nutrient(reading=l[0],actual=l[1])
    sn.save()
    return sn
+
+def getAmmoniaNitrate(l)
+   for i in xrange(len(l)):
+      if not l[i] or l[i] == '':
+         l[i] = -1
+   am = Ammonia_Nitrate(tank1=getSingleNutrient(l[0:2]),
+                        tank2=getSingleNutrient(l[2:4]),
+                        tank3=getSingleNutrient(l[4:6]),
+                        tank4=getSingleNutrient(l[6:8]),
+                        sed=getSingleNutrient(l[8:10]),
+                        beg=getSingleNutrient(l[10:12]),
+                        end=getSingleNutrient(l[12:14]))
+   am.save()
+   return am
+   
 
    
 
