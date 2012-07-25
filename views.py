@@ -884,8 +884,8 @@ def mn_generate_plot(date1,date2,system,thetype):
 
    fig.autofmt_xdate()
    plt.plot(x_a,y_a,'-o',label="Actual ppm")
-   plt.plot(x_r,y_r,'-o',label="Read ppm")
-   plt.legend()
+   plt.plot(x_r,y_r,'-o',label="Reading ppm")
+   plt.legend(loc=2)
    txt_a = "No data points"
    if len(y_a) > 0:
       txt_a = "Actual Average: %.1f" % average_a
