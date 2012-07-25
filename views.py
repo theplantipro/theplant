@@ -1154,12 +1154,12 @@ def am_generate_plot(date1,date2,system,where,thetype):
    tups = []
    objects = Ammonia_Nitrate_Testing.objects.filter(date__gte=date1,date__lte=date2,system=system).order_by("date")
    if thetype == "nitrate":
-      objects = [o.nitrate for o in objects]
+      objects = [(o.nitrate,o.date) for o in objects]
    else:
-      objects = [o.ammonia for o in objects]
+      objects = [(o.ammonia,o.date) for o in objects]
 
    if where=="tank1":
-      tups = unzip([(o.tank1,o.date) for o in objects])   
+      tups = unzip([(o[0].tank1,o[1]) for o in objects])   
    elif where=="tank2":
       tups = unzip([(o.tank2,o.date) for o in objects])   
    elif where=="tank3":
