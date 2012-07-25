@@ -448,7 +448,7 @@ def mn_process(request):
             mn_write_to_spread(date1,date2)
             return HttpResponseRedirect('/static/admin/files/test.xls')
          else:
-            mn_generate_plot(date1,date2,system,where,thetype)
+            mn_generate_plot(date1,date2,system,thetype)
             return HttpResponseRedirect('/static/admin/files/test.png')
  
 
