@@ -343,7 +343,7 @@ def getSingleNutrient(l):
    sn.save()
    return sn
 
-def getAmmoniaNitrate(l)
+def getAmmoniaNitrate(l):
    for i in xrange(len(l)):
       if not l[i] or l[i] == '':
          l[i] = -1
