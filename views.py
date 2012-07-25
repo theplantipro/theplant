@@ -155,7 +155,7 @@ def mn_inputs(request):
                               date=date,
                               author=author,
                               nitrate=nitrate,
-                              phosphorus=phosporus,
+                              phosphorus=phosphorus,
                               potassium=potassium,
                               ammonia=ammonia,
                               iron_reading=iron_reading,
