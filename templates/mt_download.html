@@ -18,15 +18,33 @@
       <p>Date: <input type="date" name="date1"></p>
       <p>Date: <input type="date" name="date2"></p>
       <input type="checkbox" name="alldates">Get All Entries</input>
-      <select name="action">
-         <option value="spreadsheet">Export to spreadsheet</option>
-         <option value="mt_spreadsheet">Export to main testing spreadsheet</option>
-         <option value="temp">Temperature Stats</option>
-         <option value="ph">ph Stats</option>
-         <option value="do">do Stats</option>
-         <option value="humidity">Humidity Stats</option>
-         <option value="food">Food Stats</option>
+      <input type="checkbox" name="Export">Export to Spreadsheet</input>
+      <select name="system">
+         <option value=1>System 1</option>
+         <option value=2>System 2</option>
+         <option value=3>Both</option>
       </select>
+      <select name="where">
+         <option value="tank1">Tank 1</option>
+         <option value="tank2">Tank 2</option>
+         <option value="tank3">Tank 3</option>
+         <option value="tank4">Tank 4</option>
+         <option value="sed">Sediment Tank</option>
+         <option value="beg">Beginning Bed</option>
+         <option value="end">Ending Bed</option>
+         <option value="all">All</option>
+      </select>
+      <select name="type">
+         <option value="ph">pH</option>
+         <option value="temp">Temperature</option>
+         <option value="do">DO</option>
+         <option value="nitrate">Nitrate</option>
+      </select>
+      <input type="submit" value="Submit"/>
+   </form>
+   
+</body>
+</html>
       <input type="submit" value="Submit"/>
    </form>
    
