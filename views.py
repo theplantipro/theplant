@@ -218,13 +218,13 @@ def process(request):
    date2 = ''
    if request.method == 'GET':
       isAll = request.GET.get('alldates','')=='on' 
+      action = request.GET.get('action')
       if isAll:
-         datetuple = getDates()
+         datetuple = getDates(action)
          date1 = datetuple[0]
          date2 = datetuple[1]
       date1s = request.GET.get('date1','')
       date2s = request.GET.get('date2','')
-      action = request.GET.get('action')
       if not isAll and not date1s:
          errors.append('Enter a start date')
       if not isAll and not date2s:
@@ -544,9 +544,16 @@ def filter_out(xy):
    except:
       return False
 
-def getDates():
-   first = Log.objects.all().order_by("date")[0]
-   last = Log.objects.all().order_by("-date")[0]
+def getDates(thetype):
+   first=''
+   last=''
+   if(thetype="spreadsheet"):
+      first = Log.objects.all().order_by("date")[0]
+      last = Log.objects.all().order_by("-date")[0]
+   elif(thetype="mt_spreadsheet"):
+      first = Main_Testing.objects.all().order_by("date")[0]
+      last = Main_Testing.objects.all().order_by("-date")[0]
+   
    returnval = (first.date,last.date)
    return returnval
 
