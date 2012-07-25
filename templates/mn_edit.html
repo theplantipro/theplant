@@ -15,9 +15,9 @@
    {% endif %}
 
    <form action="" method="post">{% csrf_token %}
-      <p>Date: <input type="date" name="date" value={{mn.date}}/></p>
-      <p>Author: <input type="text" name="author" value={{mn.author}}/></p>
-      <p>System #:<input type="number" name="system" value={{mn.system}}/></p>
+      <p>Date: <input type="date" name="date" value={{mn.date}} /></p>
+      <p>Author: <input type="text" name="author" value={{mn.author}} /></p>
+      <p>System #:<input type="number" name="system" value={{mn.system}} /></p>
       <table style="border:1px solid gray">
          <tr>
             <td></td><td>Reading ppm</td><td>Actual ppm</td>
@@ -26,47 +26,47 @@
          </tr>
          <tr>
             <th>Nitrate</th>
-            <td><input type="number" step="any" name="nitrate" value={{mn.nitrate.reading}}/></td>
-            <td><input type="number" step="any" name="nitrate" value={{mn.nitrate.actual}}/></td>
+            <td><input type="number" step="any" name="nitrate" value={{mn.nitrate.reading}} /></td>
+            <td><input type="number" step="any" name="nitrate" value={{mn.nitrate.actual}} /></td>
          </tr>
          <tr>
             <th>Phosphorus</th>
-            <td><input type="number" step="any" name="phosphorus" value={{mn.phosphorus.reading}}/></td>
-            <td><input type="number" step="any" name="phosphorus" value={{mn.phosphorus.actual}}/></td>
+            <td><input type="number" step="any" name="phosphorus" value={{mn.phosphorus.reading}} /></td>
+            <td><input type="number" step="any" name="phosphorus" value={{mn.phosphorus.actual}} /></td>
          </tr>
          <tr>
             <th>Potassium</th>
-            <td><input type="number" step="any" name="potassium" value={{mn.potassium.reading}}/></td>
-            <td><input type="number" step="any" name="potassium" value={{mn.potassium.actual}}/></td>
+            <td><input type="number" step="any" name="potassium" value={{mn.potassium.reading}} /></td>
+            <td><input type="number" step="any" name="potassium" value={{mn.potassium.actual}} /></td>
          </tr>
          <tr>
             <th>Ammonia</th>
-            <td><input type="number" step="any" name="ammonia" value={{mn.ammonia.reading}}/></td>
-            <td><input type="number" step="any" name="ammonia" value={{mn.ammonia.actual}}/></td>
+            <td><input type="number" step="any" name="ammonia" value={{mn.ammonia.reading}} /></td>
+            <td><input type="number" step="any" name="ammonia" value={{mn.ammonia.actual}} /></td>
          </tr>
          <tr>
             <th>Sulfate</th>
-            <td><input type="number" step="any" name="sulfate" value={{mn.sulfate.reading}}/></td>
-            <td><input type="number" step="any" name="sulfate" value={{mn.sulfate.actual}}/></td>
+            <td><input type="number" step="any" name="sulfate" value={{mn.sulfate.reading}} /></td>
+            <td><input type="number" step="any" name="sulfate" value={{mn.sulfate.actual}} /></td>
          </tr>
          <tr>
             <th>Iron</th>
-            <td><input type="text" name="iron_r" value={{mn.iron.reading}}/></td>
-            <td><input type="text" name="iron_a" value={{mn.iron.actual}}/></td>
+            <td><input type="text" name="iron_r" value={{mn.iron.reading}} /></td>
+            <td><input type="text" name="iron_a" value={{mn.iron.actual}} /></td>
          </tr>
          <tr>
             <th>Calcium</th>
-            <td><input type="number" step="any" name="calcium" value={{mn.calcium.reading}}/></td>
-            <td><input type="number" step="any" name="calcium" value={{mn.calcium.actual}}/></td>
+            <td><input type="number" step="any" name="calcium" value={{mn.calcium.reading}} /></td>
+            <td><input type="number" step="any" name="calcium" value={{mn.calcium.actual}} /></td>
          </tr>
          <tr>
             <th>Magnesium</th>
-            <td><input type="number" step="any" name="magnesium" value={{mn.magnesium.reading}}/></td>
-            <td><input type="number" step="any" name="magnesium" value={{mn.magnesium.actual}}/></td>
+            <td><input type="number" step="any" name="magnesium" value={{mn.magnesium.reading}} /></td>
+            <td><input type="number" step="any" name="magnesium" value={{mn.magnesium.actual}} /></td>
          </tr>
          <tr>
             <th>Comment</th>
-            <td><input type="text" name="note" value={{mn.note}}/></td>
+            <td><input type="text" name="note" value={{mn.note}} /></td>
          </tr>
       </table>
       <input type="submit" value="Submit">
