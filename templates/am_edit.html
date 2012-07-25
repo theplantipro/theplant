@@ -1,0 +1,85 @@
+<html>
+   <head>
+      <title>Data input</title>
+   </head>
+
+<body>
+   <h1>Data input</h1>
+
+   {% if errors %}
+      <ul>
+         {% for error in errors %}
+         <li>{{ error }}</li>
+         {% endfor %}
+      </ul>
+   {% endif %}
+
+   <form action="" method="post">{% csrf_token %}
+      <p>Date: <input type="date" name="date" value={{am.date}} /></p>
+      <p>Author: <input type="text" name="author" value={{am.author}} /></p>
+      <p>System #:<input type="number" name="system" value={{am.system}} /></p>
+      <table style="border:1px solid gray">
+         <tr>
+            <td></td><td>Nitrate Measured ppm</td><td>Nitrate Actual ppm</td><td>Ammonia Measured ppm</td><td>Ammonia Actual ppm</td>
+
+         </tr>
+         <tr><p></p>
+         </tr>
+         <tr>
+            <th>Tank 1 </th>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.tank1.reading}} /></td>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.tank1.actual}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.tank1.reading}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.tank1.actual}} /></td>
+         </tr>
+         <tr>
+            <th>Tank 2</th>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.tank2.reading}} /></td>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.tank2.actual}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.tank2.reading}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.tank2.actual}} /></td>
+         </tr>
+         <tr>
+            <th>Tank 3</th>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.tank3.reading}} /></td>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.tank3.actual}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.tank3.reading}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.tank3.actual}} /></td>
+         </tr>
+         <tr>
+            <th>Tank 4</th>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.tank4.reading}} /></td>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.tank4.actual}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.tank4.reading}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.tank4.actual}} /></td>
+         </tr>
+         <tr>
+            <th>Sediment Tank</th>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.sed.reading}} /></td>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.sed.actual}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.sed.reading}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.sed.actual}} /></td>
+         </tr>
+         <tr>
+            <th>Beginning Bed</th>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.beg.reading}} /></td>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.beg.actual}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.beg.reading}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.beg.actual}} /></td>
+         </tr>
+         <tr>
+            <th>End Bed</th>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.end.reading}} /></td>
+            <td><input type="number" step="any" name="n" value={{am.nitrate.end.actual}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.end.reading}} /></td>
+            <td><input type="number" step="any" name="a" value={{am.ammonia.end.actual}} /></td>
+         </tr>
+         <tr>
+            <th>Comment</th>
+            <td><input type="text" name="note" value={{am.note}} /></td>
+         </tr>
+      </table>
+      <input type="submit" value="Submit">
+   </form>
+</body>
+</html>
