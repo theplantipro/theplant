@@ -337,7 +337,7 @@ def am_edit(request,theid):
    else:
       amm = Ammonia_Nitrate_Testing.objects.filter(id=int(theid))[0]
       amm.nitrate = am_checkBlank(amm.nitrate)
-      am.ammonia = am_checkBlank(amm.ammonia)
+      amm.ammonia = am_checkBlank(amm.ammonia)
       amm.date = str(amm.date)
       amm.note = amm.note
       amm.author = amm.author
