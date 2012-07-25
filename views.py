@@ -413,6 +413,44 @@ def mt_process(request):
 
    return render_to_response('download.html',{'errors':errors})
 
+def mn_process(request):
+   errors=[]
+   date1 = ''
+   date2 = ''
+   if request.method == 'GET':
+      isAll = request.GET.get('alldates','')=='on' 
+      export = request.GET.get('export','')=='on' 
+      action = request.GET.get('action')
+      system = request.GET.get('system')
+      thetype = request.GET.get('thetype')
+      if isAll:
+         datetuple = getDates("mn_spreadsheet")
+         date1 = datetuple[0]
+         date2 = datetuple[1]
+      date1s = request.GET.get('date1','')
+      date2s = request.GET.get('date2','')
+      if not isAll and not date1s:
+         errors.append('Enter a start date')
+      if not isAll and not date2s:
+         errors.append('Enter an end date')
+      if isAll or (date1s and date2s): 
+         if not isAll:
+            date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+            date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
+         if not isAll and date2<date1:
+            errors.append('Starting date must be less or equal to ending date')
+     
+      if not errors:
+         if export: 
+            mn_write_to_spread(date1,date2)
+            return HttpResponseRedirect('/static/admin/files/test.xls')
+         else:
+            mn_generate_plot(date1,date2,system,where,thetype)
+            return HttpResponseRedirect('/static/admin/files/test.png')
+ 
+
+   return render_to_response('download.html',{'errors':errors})
+
 
 def dateedit(request):
    return render_to_response('dateedit.html')
@@ -782,6 +820,79 @@ def parse_floats(string):
    except:
       return 0
 
+def mn_generate_plot(date1,date2,system,thetype):
+   path = '/srv/http/static/admin/files/test.png'
+   if os.path.exists(path):
+      os.remove(path)
+   tups = []
+   objects = Micro_Nutrient_Testing.objects.filter(date__gte=date1,date__lte=date2,system=system).order_by("date")
+
+   if thetype == "nitrate":
+      tups = unzip([(o.nitrate,o.date) for o in objects])   
+   elif thetype== "phosphorus":
+      tups = unzip([(o.phosphorus,o.date) for o in objects])   
+   elif thetype == "potassium":
+      tups = unzip([(o.potassium,o.date) for o in objects])   
+   elif thetype == "ammonia":
+      tups = unzip([(o.ammonia,o.date) for o in objects])   
+   elif thetype == "sulfate":
+      tups = unzip([(o.sulfate,o.date) for o in objects])   
+   elif thetype == "calcium":
+      tups = unzip([(o.calcium,o.date) for o in objects])  
+   elif thetype == "magnesium":
+      tups = unzip([(o.magnesium,o.date) for o in objects])   
+
+   dates = tups[1]
+   objects = tups[0]
+
+   fig = plt.figure()
+   ax = fig.add_subplot(1,1,1)
+   ax.set_xlabel("Date",color='red')
+   yaxis_a = [o.actual for o in objects]
+   yaxis_r = [o.readingfor o in objects]
+   ax.set_ylabel("ppm",color='red')
+
+   d = {'nitrate':'Nitrate Data','phosphorus':'Phosphorus Data','potassium':'Potassium Data','ammonia':'Ammonia Data','sulfate':'Sulfate Data','calcium':'Calcium Data','magnesium':'Magnesium Data','1':'System 1','2':'System 2'}
+
+   ax.set_title("%s for %s" % (d[thetype],d[system]))
+
+   xy_a = zip(dates,yaxis_a)
+   xy_r = zip(dates,yaxis_r)
+   xy_filtered_a = filter(filter_out,xy_a)
+   xy_filtered_r = filter(filter_out,xy_r)
+   x_a = [temp[0] for temp in xy_filtered_a]
+   x_r = [temp[0] for temp in xy_filtered_r]
+   y_temp_a = [temp[1] for temp in xy_filtered_a]
+   y_temp_r = [temp[1] for temp in xy_filtered_r]
+  
+   y_a = map(parse_floats,y_temp_a)
+   y_r = map(parse_floats,y_temp_r)
+   if len(y_a) > 0:
+      average_a = sum(y_a)/len(y_a)
+   if len(y_r) > 0:
+      average_r = sum(y_r)/len(y_r)
+
+
+   #fig = plt.figure()
+   #ax = fig.add_subplot(1,1,1)
+
+   ax.yaxis_a.set_major_formatter(FuncFormatter(lambda y_a,pos:('%.1f')%y_a))
+   
+
+   fig.autofmt_xdate()
+   plt.plot(x_a,y_a)
+   plt.plot(x_r,y_r)
+   txt_a = "No data points"
+   if len(y_a) > 0:
+      txt_a = "Actual Average: %.1f" % average_a
+   txt_r = "No data points"
+   if len(y_r) > 0:
+      txt_r = "Reading Average: %.1f" % average_r
+   txt = "%s\n%s"%(txt_a,txt_r)
+   fig.text(1,0.95,txt,ha='right',va='top',transform=ax.transAxes,bbox=dict(facecolor='red',alpha=0.3))
+   plt.savefig(path)
+
+
 
 def parse_floats(string):
    if string is None:
@@ -810,6 +921,9 @@ def getDates(thetype):
    elif(thetype=="mt_spreadsheet"):
       first = Main_Testing.objects.all().order_by("date")[0]
       last = Main_Testing.objects.all().order_by("-date")[0]
+   elif(thetype=="mn_spreadsheet"):
+      first = Micro_Nutrient_Testing.objects.all().order_by("date")[0]
+      last = Micro_Nutrient_Testing.objects.all().order_by("-date")[0]
    
    returnval = (first.date,last.date)
    return returnval
