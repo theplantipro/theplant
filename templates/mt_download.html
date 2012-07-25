@@ -1,10 +1,10 @@
 <html>
    <head>
-      <title>Get Data</title>
+      <title>Get Main Testing Data</title>
    </head>
 
 <body>
-   <h1>Get Data</h1>
+   <h1>Get Main Testing Data </h1>
 
    {% if errors %}
       <ul>
@@ -15,11 +15,14 @@
    {% endif %}
 
    <form action="/app/download/mt_process" method="get">
+      <p>Select Date Range</p>
       <p>Date: <input type="date" name="date1"></p>
       <p>Date: <input type="date" name="date2"></p>
       <p><input type="checkbox" name="alldates">Get All Entries</input></p>
+      <p></p>
+      <p>Get Plot</p>
       <p><input type="submit" value="Export to Spreadsheet" name="export"></input></p>
-      <p>Or Get Plot</p>
+      <p>Get Plot</p>
       <select name="system">
          <option value=1>System 1</option>
          <option value=2>System 2</option>
