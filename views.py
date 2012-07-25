@@ -1187,7 +1187,7 @@ def am_generate_plot(date1,date2,system,where,thetype):
       plt.savefig(path)
       return
       
-   d = {'nitrate':'Nitrate','ammonia':'Ammonia','1':'Sys 1','2':'Sys 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sediment Tank','beg':'Beginning Bed','end':'End Bed','all':'All Tanks and Beds'}
+   d = {'nitrate':'Nitrate','ammonia':'Ammonia','1':'Sys 1','2':'Sys 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sed Tank','beg':'Beg Bed','end':'End Bed','all':'All Tanks and Beds'}
 
    dates = tups[1]
    objects = tups[0]
