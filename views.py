@@ -571,7 +571,7 @@ def mt_generate_plot(date1,date2,system,where,thetype):
       os.remove(path)
    objects = []
    tups = []
-   if system == 3:
+   if system == '3':
       objects = Main_Testing.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
    else:
       objects = Main_Testing.objects.filter(date__gte=date1,date__lte=date2,system=system).order_by("date")
