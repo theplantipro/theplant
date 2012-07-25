@@ -17,8 +17,9 @@
    <form action="/app/download/mt_process" method="get">
       <p>Date: <input type="date" name="date1"></p>
       <p>Date: <input type="date" name="date2"></p>
-      <input type="checkbox" name="alldates">Get All Entries</input>
-      <input type="submit" name="export">Export to Spreadsheet</input>
+      <p><input type="checkbox" name="alldates">Get All Entries</input></p>
+      <p><input type="submit" value="Export to Spreadsheet" name="export"></input></p>
+      <p>Or Get Plot</p>
       <select name="system">
          <option value=1>System 1</option>
          <option value=2>System 2</option>
@@ -40,7 +41,7 @@
          <option value="do">DO</option>
          <option value="nitrate">Nitrate</option>
       </select>
-      <input type="submit" value="Submit"/>
+      <input type="submit" value="Get Plot"/>
    </form>
    
 </body>
