@@ -18,7 +18,7 @@ def start(request):
    return render_to_response('start.html')
 
 def redirect(request):
-   d={('dm','i'):'inputs',('dm','e'):'',('dm','d'):'download',('mt','i'):'mt_inputs',('mt','e'):'',('mt','d'):'mt_download',('mn','i'):'mn_inputs',('mn','e'):'',('mn','d'):'mn_download',('am','i'):'am_inputs',('am','e'):'',('am','d'):'am_download'} 
+   d={('dm','i'):'inputs',('dm','e'):'dateedit',('dm','d'):'download',('mt','i'):'mt_inputs',('mt','e'):'mt_dateedit',('mt','d'):'mt_download',('mn','i'):'mn_inputs',('mn','e'):'mn_dateedit',('mn','d'):'mn_download',('am','i'):'am_inputs',('am','e'):'am_dateedit',('am','d'):'am_download'} 
    action = request.GET.get('action','') 
    area = request.GET.get('area','') 
    redi = "../%s" % d[(area,action)] 
