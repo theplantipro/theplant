@@ -879,7 +879,7 @@ def mn_generate_plot(date1,date2,system,thetype):
    #fig = plt.figure()
    #ax = fig.add_subplot(1,1,1)
 
-   ax.yaxis_a.set_major_formatter(FuncFormatter(lambda y_a,pos:('%.1f')%y_a))
+   ax.yaxis.set_major_formatter(FuncFormatter(lambda y_a,pos:('%.1f')%y_a))
    
 
    fig.autofmt_xdate()
