@@ -620,7 +620,7 @@ def mt_generate_plot(date1,date2,system,where,thetype):
 
    d = {'ph':'pH Data','do':'DO Data','nitrate':'Nitrate Data','temp':'Temperature Data',1:'System 1',2:'System 2',3:'System 1 and 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sediment Tank','beg':'Beginning Bed','end':'End Bed','all':'All Tanks and Beds'}
 
-   ax.set_title("%s for %s in %s" % d[thetype],d[where],d[system])
+   ax.set_title("%s for %s in %s" % (d[thetype],d[where],d[system]))
 
    dates = [o.date for o in objects]
    xy = zip(dates,yaxis)
