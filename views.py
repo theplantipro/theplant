@@ -1168,17 +1168,17 @@ def am_generate_plot(date1,date2,system,where,thetype):
    if where=="tank1":
       tups = unzip([(o[0].tank1,o[1]) for o in objects])   
    elif where=="tank2":
-      tups = unzip([(o[0].tank2,o[1].date) for o in objects])   
+      tups = unzip([(o[0].tank2,o[1]) for o in objects])   
    elif where=="tank3":
-      tups = unzip([(o[0].tank3,o[1].date) for o in objects])   
+      tups = unzip([(o[0].tank3,o[1]) for o in objects])   
    elif where=="tank4":
-      tups = unzip([(o[0].tank4,o[1].date) for o in objects])   
+      tups = unzip([(o[0].tank4,o[1]) for o in objects])   
    elif where=="sed":
-      tups = unzip([(o[0].sed,o[1].date) for o in objects])   
+      tups = unzip([(o[0].sed,o[1]) for o in objects])   
    elif where=="beg":
-      tups = unzip([(o[0].beg,o[1].date) for o in objects])  
+      tups = unzip([(o[0].beg,o[1]) for o in objects])  
    elif where=="end":
-      tups = unzip([(o[0].end,o[1].date) for o in objects])   
+      tups = unzip([(o[0].end,o[1]) for o in objects])   
 
    if not tups:
       fig = plt.figure()
