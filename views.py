@@ -158,6 +158,7 @@ def mn_inputs(request):
                               phosphorus=phosphorus,
                               potassium=potassium,
                               ammonia=ammonia,
+                              sulfate=sulfate,
                               iron_reading=iron_reading,
                               iron_actual=iron_actual,
                               calcium=calcium,
