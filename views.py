@@ -425,6 +425,9 @@ def mt_download(request):
 def mn_download(request):
    return render_to_response('mn_download.html')
 
+def am_download(request):
+   return render_to_response('am_download.html')
+
 def process(request):
    errors=[]
    date1 = ''
