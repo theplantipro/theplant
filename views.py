@@ -559,6 +559,7 @@ def am_process(request):
       action = request.GET.get('action')
       system = request.GET.get('system')
       thetype = request.GET.get('thetype')
+      where = request.GET.get('where')
       if isAll:
          datetuple = getDates("am_spreadsheet")
          date1 = datetuple[0]
@@ -581,7 +582,7 @@ def am_process(request):
             am_write_to_spread(date1,date2)
             return HttpResponseRedirect('/static/admin/files/test.xls')
          else:
-            am_generate_plot(date1,date2,system,thetype)
+            am_generate_plot(date1,date2,system,where,thetype)
             return HttpResponseRedirect('/static/admin/files/test.png')
  
 
