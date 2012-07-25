@@ -849,6 +849,7 @@ def mn_generate_plot(date1,date2,system,thetype):
       fig = plt.figure()
       ax = fig.add_subplot(1,1,1)
       ax.set_title("No data found")
+      plt.savefig(path)
       return
       
    dates = tups[1]
