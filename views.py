@@ -262,15 +262,15 @@ def mn_edit(request,theid):
          return HttpResponseRedirect('thanks/')
    else:
       micron = Micro_Nutrient_Testing.objects.filter(id=int(theid))[0]
-      micron.nitrate = checkBlank(micron.nitrate)
-      micron.phosphorus = checkBlank(micron.phosphorus)
-      micron.potassium = checkBlank(micron.potassium)
-      micron.ammonia = checkBlank(micron.ammonia)
-      micron.sulfate = checkBlank(micron.sulfate)
+      micron.nitrate = mn_checkBlank(micron.nitrate)
+      micron.phosphorus = mn_checkBlank(micron.phosphorus)
+      micron.potassium = mn_checkBlank(micron.potassium)
+      micron.ammonia = mn_checkBlank(micron.ammonia)
+      micron.sulfate = mn_checkBlank(micron.sulfate)
       micron.iron_actual = micron.iron_actual
       micron.iron_reading = micron.iron_reading
-      micron.calcium = checkBlank(micron.calcium)
-      micron.magnesium = checkBlank(micron.magnesium)
+      micron.calcium = mn_checkBlank(micron.calcium)
+      micron.magnesium = mn_checkBlank(micron.magnesium)
       micron.date = micron.date
       micron.note = micron.note
       micron.author= micron.author
@@ -290,6 +290,13 @@ def checkBlank(l):
       l.do = '' 
    if l.nitrate== -1:
       l.nitrate= '' 
+   return l
+
+def mn_checkBlank(l):
+   if l.reading == -1:
+      l.reading= '' 
+   if l.actual == -1:
+      l.actual = '' 
    return l
    
 
