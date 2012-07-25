@@ -1187,7 +1187,7 @@ def am_generate_plot(date1,date2,system,where,thetype):
       plt.savefig(path)
       return
       
-   d = {'nitrate':'Nitrate','ammonia':'Ammonia','1':'System 1','2':'System 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sediment Tank','beg':'Beginning Bed','end':'End Bed','all':'All Tanks and Beds'}
+   d = {'nitrate':'Nitrate','ammonia':'Ammonia','1':'Sys 1','2':'Sys 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sediment Tank','beg':'Beginning Bed','end':'End Bed','all':'All Tanks and Beds'}
 
    dates = tups[1]
    objects = tups[0]
@@ -1200,7 +1200,7 @@ def am_generate_plot(date1,date2,system,where,thetype):
    ax.set_ylabel("ppm",color='red')
 
 
-   ax.set_title("Measured and Actual %s ppm for %s in %s" % (d[thetype],d[where],d[system]))
+   ax.set_title("Meas/Act %s ppm for %s in %s" % (d[thetype],d[where],d[system]))
 
    xy_a = zip(dates,yaxis_a)
    xy_r = zip(dates,yaxis_r)
