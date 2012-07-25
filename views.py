@@ -478,7 +478,7 @@ def mt_process(request):
    date2 = ''
    if request.method == 'GET':
       isAll = request.GET.get('alldates','')=='on' 
-      export = request.GET.get('export','')=='on' 
+      export = if request.GET.get('export','') 
       action = request.GET.get('action')
       system = request.GET.get('system')
       where = request.GET.get('where')
