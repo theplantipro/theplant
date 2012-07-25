@@ -845,6 +845,12 @@ def mn_generate_plot(date1,date2,system,thetype):
    elif thetype == "magnesium":
       tups = unzip([(o.magnesium,o.date) for o in objects])   
 
+   if not is tups:
+      fig = plt.figure()
+      ax = fig.add_subplot(1,1,1)
+      ax.set_title("No data found")
+      return
+      
    dates = tups[1]
    objects = tups[0]
 
