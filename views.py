@@ -763,6 +763,14 @@ def mt_generate_plot(date1,date2,system,where,thetype):
       tupsy.extend([(o.beg,o.date) for o in objects])
       tupsy.extend([(o.end,o.date) for o in objects])
       tups = unzip([(tup[0],tup[1]) for tup in tupsy])
+
+   if not tups:
+      fig = plt.figure()
+      ax = fig.add_subplot(1,1,1)
+      ax.set_title("No data found")
+      plt.savefig(path)
+      return
+
    dates = tups[1]
    objects = tups[0]
 
