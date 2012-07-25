@@ -330,6 +330,9 @@ def download(request):
 def mt_download(request):
    return render_to_response('mt_download.html')
 
+def mn_download(request):
+   return render_to_response('mn_download.html')
+
 def process(request):
    errors=[]
    date1 = ''
