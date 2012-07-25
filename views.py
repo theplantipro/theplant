@@ -588,19 +588,19 @@ def mt_generate_plot(date1,date2,system,where,thetype):
    elif where=="sed":
       tups = unzip([(o.sed,o.date) for o in objects])   
    elif where=="beg":
-      objects = unzip([(o.beg,o.date) for o in objects] )  
+      tups = unzip([(o.beg,o.date) for o in objects])  
    elif where=="end":
-      objects = [o.end for o in objects]   
+      tups = unzip([(o.end,o.date) for o in objects])   
    else:
-      obj = []
-      obj.extend([o.tank1 for o in objects])
-      obj.extend([o.tank2 for o in objects])
-      obj.extend([o.tank3 for o in objects])
-      obj.extend([o.tank4 for o in objects])
-      obj.extend([o.sed for o in objects])
-      obj.extend([o.beg for o in objects])
-      obj.extend([o.end for o in objects])
-      objects = obj
+      tups = []
+      tups.extend([(o.tank1,o.date) for o in objects])
+      tups.extend([(o.tank2,o.date) for o in objects])
+      tups.extend([(o.tank3,o.date) for o in objects])
+      tups.extend([(o.tank4,o.date) for o in objects])
+      tups.extend([(o.sed,o.date) for o in objects])
+      tups.extend([(o.beg,o.date) for o in objects])
+      tups.extend([(o.end,o.date) for o in objects])
+      tups = unzip(tups)
    dates = tups[1]
    objects = tups[0]
 
