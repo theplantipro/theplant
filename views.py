@@ -667,7 +667,7 @@ def mn_write_to_spread(date1,date2):
       sheet.write(i+2,2,'Actual ppm')
       sheet.write(i+3,1,obj.system)
       mn_write_row(i+4,1,obj.nitrate,sheet)
-      mn_write_row(i+5,1,obj.phophorus,sheet)
+      mn_write_row(i+5,1,obj.phosphorus,sheet)
       mn_write_row(i+6,1,obj.potassium,sheet)
       mn_write_row(i+7,1,obj.ammonia,sheet)
       mn_write_row(i+8,1,obj.sulfate,sheet)
