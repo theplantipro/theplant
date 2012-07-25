@@ -212,6 +212,9 @@ def thanks(request):
 def download(request):
    return render_to_response('download.html')
 
+def mt_download(request):
+   return render_to_response('mt_download.html')
+
 def process(request):
    errors=[]
    date1 = ''
@@ -254,6 +257,42 @@ def process(request):
                generate_plot(date1,date2,3)
             else:
                generate_plot(date1,date2,4)
+            return HttpResponseRedirect('/static/admin/files/test.png')
+ 
+def mt_process(request):
+   errors=[]
+   date1 = ''
+   date2 = ''
+   if request.method == 'GET':
+      isAll = request.GET.get('alldates','')=='on' 
+      export = request.GET.get('export','')=='on' 
+      action = request.GET.get('action')
+      system = request.GET.get('system')
+      where = request.GET.get('where')
+      thetype = request.GET.get('thetype')
+      if isAll:
+         datetuple = getDates("mt_spreadsheet")
+         date1 = datetuple[0]
+         date2 = datetuple[1]
+      date1s = request.GET.get('date1','')
+      date2s = request.GET.get('date2','')
+      if not isAll and not date1s:
+         errors.append('Enter a start date')
+      if not isAll and not date2s:
+         errors.append('Enter an end date')
+      if isAll or (date1s and date2s): 
+         if not isAll:
+            date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+            date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
+         if not isAll and date2<date1:
+            errors.append('Starting date must be less or equal to ending date')
+     
+      if not errors:
+         if export: 
+            mt_write_to_spread(date1,date2)
+            return HttpResponseRedirect('/static/admin/files/test.xls')
+         else:
+            mt_generate_plot(date1,date2,system,where,thetype)
             return HttpResponseRedirect('/static/admin/files/test.png')
  
 
@@ -525,6 +564,96 @@ def generate_plot(date1,date2,thetype):
    txt = "Average: %.1f" % average
    fig.text(1,0.95,txt,ha='right',va='top',transform=ax.transAxes,bbox=dict(facecolor='red',alpha=0.3))
    plt.savefig(path)
+
+def mt_generate_plot(date1,date2,system,where,thetype):
+   path = '/srv/http/static/admin/files/test.png'
+   if os.path.exists(path):
+      os.remove(path)
+   objects = []
+   if system == 3:
+      objects = Main_Testing.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
+   else:
+      objects = Main_Testing.objects.filter(date__gte=date1,date__lte=date2,system=system).order_by("date")
+
+   if where=="tank1":
+      objects = [o.tank1 for o in objects]   
+   elif where=="tank2":
+      objects = [o.tank2 for o in objects]   
+   elif where=="tank3":
+      objects = [o.tank3 for o in objects]   
+   elif where=="tank4":
+      objects = [o.tank4 for o in objects]   
+   elif where=="sed":
+      objects = [o.sed for o in objects]   
+   elif where=="beg":
+      objects = [o.beg for o in objects]   
+   elif where=="end":
+      objects = [o.endfor o in objects]   
+   else:
+      obj = []
+      obj.extend([o.tank1 for o in objects])
+      obj.extend([o.tank2 for o in objects])
+      obj.extend([o.tank3 for o in objects])
+      obj.extend([o.tank4 for o in objects])
+      obj.extend([o.sed for o in objects])
+      obj.extend([o.beg for o in objects])
+      obj.extend([o.end for o in objects])
+      objects = obj
+
+   fig = plt.figure()
+   ax = fig.add_subplot(1,1,1)
+   ax.set_xlabel("Date",color='red')
+   yaxis = []
+   if thetype == "temp":
+      yaxis = [o.temp for o in objects]
+      ax.set_ylabel("Temperature (F)",color='red')
+   elif thetype == "pH":
+      yaxis = [o.ph for o in objects]
+      ax.set_ylabel("ph",color='red')
+   elif thetype == "do":
+      yaxis = [o.do for o in objects]
+      ax.set_ylabel("DO (mg/L)",color='red')
+      ax.set_title("DO Data")
+   elif thetype == "nitrate":
+      yaxis = [o.nitrate for o in objects]
+      ax.set_ylabel("Nitrate (mg/L)",color='red')
+
+   d = {'pH':'pH Data','do':'DO Data','nitrate':'Nitrate Data','temp':'Temperature Data',1:'System 1',2:'System 2',3:'System 1 and 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sediment Tank','beg':'Beginning Bed','end':'End Bed','all':'All Tanks and Beds'}
+
+   ax.set_title("%s for %s in %s" % d[thetype],d[where],d[system])
+
+   dates = [o.date for o in objects]
+   xy = zip(dates,yaxis)
+   xy_filtered = filter(filter_out,xy)
+   x = [temp[0] for temp in xy_filtered]
+   y_temp = [temp[1] for temp in xy_filtered]
+  
+   y = map(parse_floats,y_temp)
+   average = sum(y)/len(y)
+
+
+   #fig = plt.figure()
+   #ax = fig.add_subplot(1,1,1)
+
+   ax.yaxis.set_major_formatter(FuncFormatter(lambda y,pos:('%.1f')%y))
+   
+
+   fig.autofmt_xdate()
+   plt.scatter(x,y)
+   txt = "Average: %.1f" % average
+   fig.text(1,0.95,txt,ha='right',va='top',transform=ax.transAxes,bbox=dict(facecolor='red',alpha=0.3))
+   plt.savefig(path)
+
+def parse_floats(string):
+   if string is None:
+      return 0
+   if string is '':
+      return 0
+   try:
+      return float(string)
+   except:
+      return 0
+
 
 def parse_floats(string):
    if string is None:

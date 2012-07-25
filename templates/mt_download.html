@@ -14,11 +14,11 @@
       </ul>
    {% endif %}
 
-   <form action="/app/download/process" method="get">
+   <form action="/app/download/mt_process" method="get">
       <p>Date: <input type="date" name="date1"></p>
       <p>Date: <input type="date" name="date2"></p>
       <input type="checkbox" name="alldates">Get All Entries</input>
-      <input type="checkbox" name="Export">Export to Spreadsheet</input>
+      <input type="checkbox" name="export">Export to Spreadsheet</input>
       <select name="system">
          <option value=1>System 1</option>
          <option value=2>System 2</option>
@@ -34,7 +34,7 @@
          <option value="end">Ending Bed</option>
          <option value="all">All</option>
       </select>
-      <select name="type">
+      <select name="thetype">
          <option value="ph">pH</option>
          <option value="temp">Temperature</option>
          <option value="do">DO</option>
