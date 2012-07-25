@@ -509,7 +509,7 @@ def mt_process(request):
             return HttpResponseRedirect('/static/admin/files/test.png')
  
 
-   return render_to_response('download.html',{'errors':errors})
+   return render_to_response('mt_download.html',{'errors':errors})
 
 def mn_process(request):
    errors=[]
@@ -547,7 +547,7 @@ def mn_process(request):
             return HttpResponseRedirect('/static/admin/files/test.png')
  
 
-   return render_to_response('download.html',{'errors':errors})
+   return render_to_response('mn_download.html',{'errors':errors})
 
 def am_process(request):
    errors=[]
@@ -586,7 +586,7 @@ def am_process(request):
             return HttpResponseRedirect('/static/admin/files/test.png')
  
 
-   return render_to_response('download.html',{'errors':errors})
+   return render_to_response('am_download.html',{'errors':errors})
 
 
 def dateedit(request):
