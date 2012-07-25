@@ -301,12 +301,53 @@ def mn_edit(request,theid):
       micron.date = str(micron.date)
       micron.note = micron.note
       micron.author= micron.author
+      micron.system = micron.system
     
       c.update({'mn':micron})
       return render_to_response('mn_edit.html',c)
 
    c.update({'errors':errors})
    return render_to_response('mn_input.html',c)
+
+def am_edit(request,theid):
+   c = {}
+   c.update(csrf(request))
+   errors=[]
+   if request.method == 'POST':
+      date=request.POST.get('date','')
+      if not date:
+         errors.append('Enter a date')
+      if not errors:
+         author=request.POST.get('author','')
+         system=request.POST.get('system','')
+         nitrate=getAmmoniaNitrate(request.POST.getlist('n','')) 
+         ammonia=getAmmoniaNitrate(request.POST.getlist('a','')) 
+         note=request.POST.get('note','')
+
+         am = Ammonia_Nitrate_Testing.objects.filter(id=int(theid))[0]
+         am.author = author
+         am.system=system
+         am.nitrate=nitrate
+         am.ammonia=ammonia
+         am.note=note
+         am.date=date
+
+         am.save()
+         return HttpResponseRedirect('thanks/')
+   else:
+      amm = Micro_Nutrient_Testing.objects.filter(id=int(theid))[0]
+      amm.nitrate = am_checkBlank(amm.nitrate)
+      am.ammonia = am_checkBlank(amm.ammonia)
+      amm.date = str(amm.date)
+      amm.note = amm.note
+      amm.author = amm.author
+      amm.system = amm.system
+    
+      c.update({'am':amm})
+      return render_to_response('am_edit.html',c)
+
+   c.update({'errors':errors})
+   return render_to_response('am_input.html',c)
 
 def checkBlank(l):
    if l.ph== -1:
@@ -324,6 +365,16 @@ def mn_checkBlank(l):
       l.reading= '' 
    if l.actual == -1:
       l.actual = '' 
+   return l
+
+def am_checkBlank(l):
+   l.tank1 = mn_checkBlank(l.tank1)
+   l.tank2 = mn_checkBlank(l.tank2)
+   l.tank3 = mn_checkBlank(l.tank3)
+   l.tank4 = mn_checkBlank(l.tank4)
+   l.sed = mn_checkBlank(l.sed)
+   l.beg = mn_checkBlank(l.beg)
+   l.end = mn_checkBlank(l.end)
    return l
    
 
