@@ -676,10 +676,10 @@ def filter_out(xy):
 def getDates(thetype):
    first=''
    last=''
-   if(thetype="spreadsheet"):
+   if(thetype=="spreadsheet"):
       first = Log.objects.all().order_by("date")[0]
       last = Log.objects.all().order_by("-date")[0]
-   elif(thetype="mt_spreadsheet"):
+   elif(thetype=="mt_spreadsheet"):
       first = Main_Testing.objects.all().order_by("date")[0]
       last = Main_Testing.objects.all().order_by("-date")[0]
    
