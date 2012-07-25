@@ -592,15 +592,16 @@ def mt_generate_plot(date1,date2,system,where,thetype):
    elif where=="end":
       tups = unzip([(o.end,o.date) for o in objects])   
    else:
-      tups = []
-      tups.extend([(o.tank1,o.date) for o in objects])
-      tups.extend([(o.tank2,o.date) for o in objects])
-      tups.extend([(o.tank3,o.date) for o in objects])
-      tups.extend([(o.tank4,o.date) for o in objects])
-      tups.extend([(o.sed,o.date) for o in objects])
-      tups.extend([(o.beg,o.date) for o in objects])
-      tups.extend([(o.end,o.date) for o in objects])
-      tups = unzip(tups)
+      tupsy = []
+      tupsy.extend([(o.tank1,o.date) for o in objects])
+      tupsy.extend([(o.tank2,o.date) for o in objects])
+      tupsy.extend([(o.tank3,o.date) for o in objects])
+      tupsy.extend([(o.tank4,o.date) for o in objects])
+      tupsy.extend([(o.sed,o.date) for o in objects])
+      tupsy.extend([(o.beg,o.date) for o in objects])
+      tupsy.extend([(o.end,o.date) for o in objects])
+      #tups = unzip([(t,da) for tup in tupsy])
+      tups = unzip(tupsy)
    dates = tups[1]
    objects = tups[0]
 
