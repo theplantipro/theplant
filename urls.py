@@ -3,6 +3,7 @@ from testproject.views import hello, current_datetime,search_form,search
 from testproject.views import inputs,thanks,download,process,dateedit
 from testproject.views import processdate,edit,plot,start,redirect, mt_inputs
 from testproject.views import mt_edit,mt_download,mt_process,mn_inputs, mn_edit
+from testproject.views import mn_process
 from django.contrib import admin # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 admin.autodiscover()
@@ -24,6 +25,7 @@ urlpatterns = patterns('',
    (r'^app/mt_download/$',mt_download),
    (r'^app/download/process/$',process),
    (r'^app/download/mt_process/$',mt_process),
+   (r'^app/download/mn_process/$',mn_process),
    #(r'^app/download/process/$',plot),
    (r'^app/dateedit/$',dateedit),
    (r'^app/dateedit/processdate/$',processdate),
