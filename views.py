@@ -1146,6 +1146,90 @@ def mn_generate_plot(date1,date2,system,thetype):
    fig.text(1,0.98,txt,ha='right',va='top',transform=ax.transAxes,bbox=dict(facecolor='red',alpha=0.3))
    plt.savefig(path)
 
+def am_generate_plot(date1,date2,system,where,thetype):
+   path = '/srv/http/static/admin/files/test.png'
+   if os.path.exists(path):
+      os.remove(path)
+   tups = []
+   objects = Ammonia_Nitrate_Testing.objects.filter(date__gte=date1,date__lte=date2,system=system).order_by("date")
+   if thetype == "nitrate":
+      objects = [o.nitrate for o in objects]
+   else:
+      objects = [o.ammonia for o in objects]
+
+   if where=="tank1":
+      tups = unzip([(o.tank1,o.date) for o in objects])   
+   elif where=="tank2":
+      tups = unzip([(o.tank2,o.date) for o in objects])   
+   elif where=="tank3":
+      tups = unzip([(o.tank3,o.date) for o in objects])   
+   elif where=="tank4":
+      tups = unzip([(o.tank4,o.date) for o in objects])   
+   elif where=="sed":
+      tups = unzip([(o.sed,o.date) for o in objects])   
+   elif where=="beg":
+      tups = unzip([(o.beg,o.date) for o in objects])  
+   elif where=="end":
+      tups = unzip([(o.end,o.date) for o in objects])   
+
+   if not tups:
+      fig = plt.figure()
+      ax = fig.add_subplot(1,1,1)
+      ax.set_title("No data found")
+      plt.savefig(path)
+      return
+      
+   d = {'nitrate':'Nitrate','ammonia':'Ammonia','1':'System 1','2':'System 2','tank1':'Tank 1','tank2':'Tank 2','tank3': 'Tank 3','tank4':'Tank 4','sed':'Sediment Tank','beg':'Beginning Bed','end':'End Bed','all':'All Tanks and Beds'}
+
+   dates = tups[1]
+   objects = tups[0]
+
+   fig = plt.figure()
+   ax = fig.add_subplot(1,1,1)
+   ax.set_xlabel("Date",color='red')
+   yaxis_a = [o.actual for o in objects]
+   yaxis_r = [o.reading for o in objects]
+   ax.set_ylabel("ppm",color='red')
+
+
+   ax.set_title("Measured and Actual %s ppm for %s in %s" % (d[thetype],d[where],d[system]))
+
+   xy_a = zip(dates,yaxis_a)
+   xy_r = zip(dates,yaxis_r)
+   xy_filtered_a = filter(filter_out,xy_a)
+   xy_filtered_r = filter(filter_out,xy_r)
+   x_a = [temp[0] for temp in xy_filtered_a]
+   x_r = [temp[0] for temp in xy_filtered_r]
+   y_temp_a = [temp[1] for temp in xy_filtered_a]
+   y_temp_r = [temp[1] for temp in xy_filtered_r]
+  
+   y_a = map(parse_floats,y_temp_a)
+   y_r = map(parse_floats,y_temp_r)
+   if len(y_a) > 0:
+      average_a = sum(y_a)/len(y_a)
+   if len(y_r) > 0:
+      average_r = sum(y_r)/len(y_r)
+
+
+   #fig = plt.figure()
+   #ax = fig.add_subplot(1,1,1)
+
+   ax.yaxis.set_major_formatter(FuncFormatter(lambda y_a,pos:('%.1f')%y_a))
+   
+
+   fig.autofmt_xdate()
+   plt.plot(x_a,y_a,'-o',label="Actual ppm")
+   plt.plot(x_r,y_r,'-o',label="Reading ppm")
+   plt.legend(loc=2)
+   txt_a = "No data points"
+   if len(y_a) > 0:
+      txt_a = "Actual Average: %.1f" % average_a
+   txt_r = "No data points"
+   if len(y_r) > 0:
+      txt_r = "Reading Average: %.1f" % average_r
+   txt = "%s\n%s"%(txt_a,txt_r)
+   fig.text(1,0.98,txt,ha='right',va='top',transform=ax.transAxes,bbox=dict(facecolor='red',alpha=0.3))
+   plt.savefig(path)
 
 
 def parse_floats(string):
