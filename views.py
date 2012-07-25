@@ -178,14 +178,6 @@ def mt_edit(request,theid):
       date=request.POST.get('date','')
       if not date:
          errors.append('Enter a date')
-def mt_edit(request,theid):
-   c = {}
-   c.update(csrf(request))
-   errors=[]
-   if request.method == 'POST':
-      date=request.POST.get('date','')
-      if not date:
-         errors.append('Enter a date')
       if not errors:
          author=request.POST.get('author','')
          system=request.POST.get('system','')
@@ -229,6 +221,65 @@ def mt_edit(request,theid):
 
    c.update({'errors':errors})
    return render_to_response('mt_input.html',c)
+
+def mn_edit(request,theid):
+   c = {}
+   c.update(csrf(request))
+   errors=[]
+   if request.method == 'POST':
+      date=request.POST.get('date','')
+      if not date:
+         errors.append('Enter a date')
+      if not errors:
+         author=request.POST.get('author','')
+         system=request.POST.get('system','')
+         nitrate=getSingleNutrient(request.POST.getlist('nitrate','')) 
+         phosphorus=getSingleNutrient(request.POST.getlist('phosphorus','')) 
+         potassium=getSingleNutrient(request.POST.getlist('potassium','')) 
+         ammonia=getSingleNutrient(request.POST.getlist('ammonia','')) 
+         sulfate=getSingleNutrient(request.POST.getlist('sulfate','')) 
+         iron_reading=request.POST.get('iron_r','')
+         iron_actual=request.POST.get('iron_a','')
+         calcium=getSingleNutrient(request.POST.getlist('calcium','')) 
+         magnesium=getSingleNutrient(request.POST.getlist('magnesium','')) 
+         note=request.POST.get('note','')
+
+         mn = Micro_Nutrient_Testing.objects.filter(id=int(theid))[0]
+         mn.author = author
+         mn.system=system
+         mn.nitrate=nitrate
+         mn.phosphorus=phosphorus
+         mn.potassium=potassium
+         mn.ammonia=ammonia
+         mn.sulfate=sulfate
+         mn.iron_reading=iron_reading
+         mn.iron_actual=iron_actual
+         mn.calcium=calcium
+         mn.magnesium=magnesium
+         mn.note=note
+
+         mn.save()
+         return HttpResponseRedirect('thanks/')
+   else:
+      micron = Micro_Nutrient_Testing.objects.filter(id=int(theid))[0]
+      micron.nitrate = checkBlank(micron.nitrate)
+      micron.phosphorus = checkBlank(micron.phosphorus)
+      micron.potassium = checkBlank(micron.potassium)
+      micron.ammonia = checkBlank(micron.ammonia)
+      micron.sulfate = checkBlank(micron.sulfate)
+      micron.iron_actual = micron.iron_actual
+      micron.iron_reading = micron.iron_reading
+      micron.calcium = checkBlank(micron.calcium)
+      micron.magnesium = checkBlank(micron.magnesium)
+      micron.date = micron.date
+      micron.note = micron.note
+      micron.author= micron.author
+    
+      c.update({'mn':micron})
+      return render_to_response('mn_edit.html',c)
+
+   c.update({'errors':errors})
+   return render_to_response('mn_input.html',c)
 
 def checkBlank(l):
    if l.ph== -1:
