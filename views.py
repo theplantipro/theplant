@@ -130,7 +130,7 @@ def mt_inputs(request):
    c.update({'errors':errors})
    return render_to_response('mt_input.html',c)
 
-def mt_inputs(request):
+def mn_inputs(request):
    c = {}
    c.update(csrf(request))
    errors=[]
