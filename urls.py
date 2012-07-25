@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import patterns, include, url
-from theplant.views import hello, current_datetime,search_form,search
-from theplant.views import inputs,thanks,download,process,dateedit
-from theplant.views import processdate,edit,plot,start,redirect, mt_inputs
-from theplant.views import mt_edit 
+from testproject.views import hello, current_datetime,search_form,search
+from testproject.views import inputs,thanks,download,process,dateedit
+from testproject.views import processdate,edit,plot,start,redirect, mt_inputs
+from testproject.views import mt_edit 
 from django.contrib import admin # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 admin.autodiscover()
