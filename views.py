@@ -130,6 +130,53 @@ def mt_inputs(request):
    c.update({'errors':errors})
    return render_to_response('mt_input.html',c)
 
+def mt_inputs(request):
+   c = {}
+   c.update(csrf(request))
+   errors=[]
+   if request.method == 'POST':
+      date=request.POST.get('date','')
+      if not date:
+         errors.append('Enter a date')
+      if not errors:
+         author=request.POST.get('author','')
+         system=request.POST.get('system','')
+         nitrate=getSingleNutrient(request.POST.getlist('nitrate','')) 
+         phosphorus=getSingleNutrient(request.POST.getlist('phosphorus','')) 
+         potassium=getSingleNutrient(request.POST.getlist('potassium','')) 
+         ammonia=getSingleNutrient(request.POST.getlist('ammonia','')) 
+         sulfate=getSingleNutrient(request.POST.getlist('sulfate','')) 
+         iron_reading=request.POST.get('iron_r','')) 
+         iron_actual=request.POST.get('iron_a','')) 
+         calcium=getSingleNutrient(request.POST.getlist('calcium','')) 
+         magnesium=getSingleNutrient(request.POST.getlist('magnesium','')) 
+         note=request.POST.get('note','')
+         mnt = Micro_Nutrient_Testing(system=system,
+                              date=date,
+                              author=author,
+                              nitrate=nitrate,
+                              phosphorus=phosporus,
+                              potassium=potassium,
+                              ammonia=ammonia,
+                              iron_reading=iron_reading,
+                              iron_actual=iron_actual,
+                              calcium=calcium,
+                              magnesium=magnesium,
+                              note=note)
+
+         mnt.save()
+         return HttpResponseRedirect('thanks/')
+   c.update({'errors':errors})
+   return render_to_response('mn_input.html',c)
+
+def mt_edit(request,theid):
+   c = {}
+   c.update(csrf(request))
+   errors=[]
+   if request.method == 'POST':
+      date=request.POST.get('date','')
+      if not date:
+         errors.append('Enter a date')
 def mt_edit(request,theid):
    c = {}
    c.update(csrf(request))
