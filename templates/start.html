@@ -1,21 +1,21 @@
 <html>
    <head>
-      <title>Get Data</title>
+      <title>The Plant</title>
    </head>
 
 <body>
-   <h1>Get Data</h1>
+   <h1>Select testing area and action</h1>
 
    <form action="redirect/" method="get">
+      <select name="area">
+         <option value="daily_maintenance">Daily Maintenance</option>
+         <option value="main_testing">Main Testing</option>
+         <option value="micro_nutrient">Micro Nutrient Testing</option>
+         <option value="ammonia_nitrate">Ammonia Nitrate Testing</option>
       <select name="action">
-         <option value="inputs">Enter Data</option>
+         <option value="input">Enter Data</option>
+         <option value="edit">Edit Data</option>
          <option value="download">Retrieve Data</option>
-         <option value="mt_inputs">Enter Main Testing Data</option>
-         <option value="mt_download">Retrieve Main Testing Data</option>
-         <option value="mn_inputs">Enter Micro Nutrient Testing Data</option>
-         <option value="mn_download">Retrieve Micro Nutrient Testing Data</option>
-         <option value="am_inputs">Enter Ammonia Nitrate Testing Data</option>
-         <option value="am_download">Retrieve Ammonia Nitrate Data</option>
       </select>
       <input type="submit" value="Submit"/>
    </form>
