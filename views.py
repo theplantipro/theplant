@@ -636,11 +636,58 @@ def mt_write_to_spread(date1,date2):
       
    wbk.save(path)
 
+def mn_write_to_spread(date1,date2):
+   objects = Micro_Nutrient_Testing.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
+   path = '/srv/http/static/admin/files/test.xls'
+
+   if os.path.exists(path):
+      os.remove(path)
+   
+   wbk = xlwt.Workbook()
+   sheet = wbk.add_sheet('sheet 1')
+    
+   i=0
+   for obj in objects:
+      sheet.write(i,0,'Date')
+      sheet.write(i+1,0,'Name')
+      sheet.write(i+3,0,'System')
+      sheet.write(i+4,0,'Nitrate')
+      sheet.write(i+5,0,'Phosphorus')
+      sheet.write(i+6,0,'Potassium')
+      sheet.write(i+7,0,'Ammonia')
+      sheet.write(i+8,0,'Sulfate')
+      sheet.write(i+9,0,'Iron')
+      sheet.write(i+10,0,'Calcium')
+      sheet.write(i+11,0,'Magnesium')
+      sheet.write(i+12,0,'Comment')
+
+      sheet.write(i+0,1,obj.date.strftime('%m/%d/%Y'))
+      sheet.write(i+1,1,obj.author)
+      sheet.write(i+2,1,'Reading ppm')
+      sheet.write(i+2,2,'Actual ppm')
+      sheet.write(i+3,1,obj.system)
+      mn_write_row(i+4,1,obj.nitrate,sheet)
+      mn_write_row(i+5,1,obj.phophorus,sheet)
+      mn_write_row(i+6,1,obj.potassium,sheet)
+      mn_write_row(i+7,1,obj.ammonia,sheet)
+      mn_write_row(i+8,1,obj.sulfate,sheet)
+      mn_write_row(i+9,1,obj.iron,sheet)
+      mn_write_row(i+10,1,obj.calcium,sheet)
+      mn_write_row(i+11,1,obj.magnesium,sheet)
+      sheet.write(i+12,1,obj.note)
+      i=i+14
+      
+   wbk.save(path)
+
 def mt_write_row(row,column,obj,sheet):
    sheet.write(row,column,'' if obj.ph == -1 else obj.ph)
    sheet.write(row,column+1,'' if obj.temp == -1 else obj.temp)
    sheet.write(row,column+2,'' if obj.do == -1 else obj.do)
    sheet.write(row,column+3,'' if obj.nitrate == -1 else obj.nitrate)
+
+def mn_write_row(row,column,obj,sheet):
+   sheet.write(row,column,'' if obj.actual== -1 else obj.actual)
+   sheet.write(row,column+1,'' if obj.reading== -1 else obj.reading)
    
 
 def plot(request):
