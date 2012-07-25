@@ -565,6 +565,9 @@ def processdate(request):
       elif action == "micro_nutrient_testing": 
          objects = Micro_Nutrient_Testing.objects.filter(date=date1)
          return render_to_response('mn_processdate.html',{'date_list':objects})
+      elif action == "ammonia_nitrate_testing":
+         objects = Ammonia_Nitrate_Testing.objects.filter(date=date1)
+         return render_to_response('am_processdate.html',{'date_list':objects})
       return render_to_response('processdate.html',{'date_list':objects})
 
 def edit(request,theid):
