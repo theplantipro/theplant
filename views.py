@@ -648,7 +648,7 @@ def mt_generate_plot(date1,date2,system,where,thetype):
 
    fig.autofmt_xdate()
    plt.scatter(x,y)
-   txt: "No data points"
+   txt = "No data points"
    if len(y) > 0:
       txt = "Average: %.1f" % average
    fig.text(1,0.95,txt,ha='right',va='top',transform=ax.transAxes,bbox=dict(facecolor='red',alpha=0.3))
