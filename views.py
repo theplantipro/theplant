@@ -1231,10 +1231,10 @@ def am_generate_plot(date1,date2,system,where,thetype):
    plt.legend(loc=2)
    txt_a = "No data points"
    if len(y_a) > 0:
-      txt_a = "Actual Average: %.1f" % average_a
+      txt_a = "Act. Avg: %.1f" % average_a
    txt_r = "No data points"
-   if len(y_r) > 0:
-      txt_r = "Reading Average: %.1f" % average_r
+   if len(y_r) > 0
+      txt_r = "Meas. Avg: %.1f" % average_r
    txt = "%s\n%s"%(txt_a,txt_r)
    fig.text(1,0.98,txt,ha='right',va='top',transform=ax.transAxes,bbox=dict(facecolor='red',alpha=0.3))
    plt.savefig(path)
