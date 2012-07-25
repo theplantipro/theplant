@@ -257,6 +257,7 @@ def mn_edit(request,theid):
          mn.calcium=calcium
          mn.magnesium=magnesium
          mn.note=note
+         mn.date=date
 
          mn.save()
          return HttpResponseRedirect('thanks/')
@@ -271,7 +272,7 @@ def mn_edit(request,theid):
       micron.iron_reading = micron.iron_reading
       micron.calcium = mn_checkBlank(micron.calcium)
       micron.magnesium = mn_checkBlank(micron.magnesium)
-      micron.date = micron.date
+      micron.date = str(micron.date)
       micron.note = micron.note
       micron.author= micron.author
     
