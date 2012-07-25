@@ -570,23 +570,25 @@ def mt_generate_plot(date1,date2,system,where,thetype):
    if os.path.exists(path):
       os.remove(path)
    objects = []
+   tups = []
    if system == 3:
       objects = Main_Testing.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
    else:
       objects = Main_Testing.objects.filter(date__gte=date1,date__lte=date2,system=system).order_by("date")
 
    if where=="tank1":
-      objects = [o.tank1 for o in objects]   
+      tups = unzip([(o.tank1,o.date) for o in objects])   
+   
    elif where=="tank2":
-      objects = [o.tank2 for o in objects]   
+      tups = unzip([(o.tank2,o.date) for o in objects])   
    elif where=="tank3":
-      objects = [o.tank3 for o in objects]   
+      tups = unzip([(o.tank3,o.date) for o in objects])   
    elif where=="tank4":
-      objects = [o.tank4 for o in objects]   
+      tups = unzip([(o.tank4,o.date) for o in objects])   
    elif where=="sed":
-      objects = [o.sed for o in objects]   
+      tups = unzip([(o.sed,o.date) for o in objects])   
    elif where=="beg":
-      objects = [o.beg for o in objects]   
+      objects = unzip([(o.beg,o.date) for o in objects] )  
    elif where=="end":
       objects = [o.end for o in objects]   
    else:
@@ -599,6 +601,8 @@ def mt_generate_plot(date1,date2,system,where,thetype):
       obj.extend([o.beg for o in objects])
       obj.extend([o.end for o in objects])
       objects = obj
+   dates = tups[1]
+   objects = tups[0]
 
    fig = plt.figure()
    ax = fig.add_subplot(1,1,1)
@@ -622,7 +626,7 @@ def mt_generate_plot(date1,date2,system,where,thetype):
 
    ax.set_title("%s for %s in %s" % (d[thetype],d[where],d[system]))
 
-   dates = [o.date for o in objects]
+   #dates = [o.date for o in objects]
    xy = zip(dates,yaxis)
    xy_filtered = filter(filter_out,xy)
    x = [temp[0] for temp in xy_filtered]
@@ -685,6 +689,9 @@ def getDates(thetype):
    
    returnval = (first.date,last.date)
    return returnval
+
+def unzip(seq):
+   return zip(*seq)
 
    
    
