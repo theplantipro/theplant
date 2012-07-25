@@ -202,6 +202,14 @@ def getSingleMain(l):
    sm.save()
    return sm
 
+def getSingleNutrient(l):
+   for i in xrange(len(l)):
+      if not l[i] or l[i] == '':
+         l[i] = -1
+   sn = Single_Nutrient(reading=l[0],actual=l[1])
+   sn.save()
+   return sn
+
    
 
 def thanks(request):
