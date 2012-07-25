@@ -546,6 +546,44 @@ def mn_process(request):
 
    return render_to_response('download.html',{'errors':errors})
 
+def am_process(request):
+   errors=[]
+   date1 = ''
+   date2 = ''
+   if request.method == 'GET':
+      isAll = request.GET.get('alldates','')=='on' 
+      export = request.GET.get('export','')=='on' 
+      action = request.GET.get('action')
+      system = request.GET.get('system')
+      thetype = request.GET.get('thetype')
+      if isAll:
+         datetuple = getDates("am_spreadsheet")
+         date1 = datetuple[0]
+         date2 = datetuple[1]
+      date1s = request.GET.get('date1','')
+      date2s = request.GET.get('date2','')
+      if not isAll and not date1s:
+         errors.append('Enter a start date')
+      if not isAll and not date2s:
+         errors.append('Enter an end date')
+      if isAll or (date1s and date2s): 
+         if not isAll:
+            date1 = datetime.datetime.strptime(date1s,"%Y-%m-%d")
+            date2 = datetime.datetime.strptime(date2s,"%Y-%m-%d")
+         if not isAll and date2<date1:
+            errors.append('Starting date must be less or equal to ending date')
+     
+      if not errors:
+         if export: 
+            am_write_to_spread(date1,date2)
+            return HttpResponseRedirect('/static/admin/files/test.xls')
+         else:
+            am_generate_plot(date1,date2,system,thetype)
+            return HttpResponseRedirect('/static/admin/files/test.png')
+ 
+
+   return render_to_response('download.html',{'errors':errors})
+
 
 def dateedit(request):
    return render_to_response('dateedit.html')
@@ -775,7 +813,7 @@ def mn_write_to_spread(date1,date2):
       
    wbk.save(path)
 
-def mn_write_to_spread(date1,date2):
+def am_write_to_spread(date1,date2):
    objects = Ammonia_Nitrate_Testing.objects.filter(date__gte=date1,date__lte=date2).order_by("date")
    path = '/srv/http/static/admin/files/test.xls'
 
@@ -1136,6 +1174,9 @@ def getDates(thetype):
    elif(thetype=="mn_spreadsheet"):
       first = Micro_Nutrient_Testing.objects.all().order_by("date")[0]
       last = Micro_Nutrient_Testing.objects.all().order_by("-date")[0]
+   elif(thetype=="am_spreadsheet"):
+      first = Ammonia_Nitrate_Testing.objects.all().order_by("date")[0]
+      last = Ammonia_Nitrate_Testing.objects.all().order_by("-date")[0]
    
    returnval = (first.date,last.date)
    return returnval
