@@ -594,6 +594,15 @@ def am_process(request):
 def dateedit(request):
    return render_to_response('dateedit.html')
 
+def mt_dateedit(request):
+   return render_to_response('mt_dateedit.html')
+
+def mn_dateedit(request):
+   return render_to_response('mn_dateedit.html')
+
+def am_dateedit(request):
+   return render_to_response('am_dateedit.html')
+
 def processdate(request):
    if request.method == 'GET':
       date1s = request.GET.get('date1','')
