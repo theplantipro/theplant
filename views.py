@@ -6,8 +6,7 @@ from data_log.models import Micro_Nutrient_Testing,Ammonia_Nitrate,Ammonia_Nitra
 from django.core.context_processors import csrf
 import datetime
 import xlwt
-import os
-import numpy as np
+import os,tempfile
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 
@@ -546,8 +545,8 @@ def filter_out(xy):
       return False
 
 def getDates():
-   first = Main_Testing.objects.all().order_by("date")[0]
-   last = Main_Testing.objects.all().order_by("-date")[0]
+   first = Log.objects.all().order_by("date")[0]
+   last = Log.objects.all().order_by("-date")[0]
    returnval = (first.date,last.date)
    return returnval
 
