@@ -1319,6 +1319,8 @@ def importx(request):
       ph = convert(sheet.col(8)[i].value)
       do = convert(sheet.col(9)[i].value)
       hum = convert(sheet.col(10)[i].value)
+      if type(hum) is float: 
+         hum = hum * 100
       note = ''
       try: 
          note = str(sheet.col(11)[i].value)
@@ -1339,12 +1341,10 @@ def importx(request):
       l.save()
 
 def convert(a):
-   if a == '':
-      return -1
    try:
       a = float(a)
    except:
-      return -1
+      return None 
    return a
    
    
