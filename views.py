@@ -1308,7 +1308,7 @@ def importx(request):
    sheet = book.sheets()[0]
    
    for i in xrange(6,sheet.nrows): 
-      date = datetime.datetime(*xlrd.xldate_as_tuple(sheet.col(0,i).value,book.datemode))
+      date = datetime.datetime(*xlrd.xldate_as_tuple(sheet.col(0)[i].value,book.datemode))
       name = sheet.col(1)[i].value
       sys1 = convert(sheet.col(2)[i].value)
       sys2 = convert(sheet.col(3)[i].value)
