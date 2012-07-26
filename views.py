@@ -1303,7 +1303,7 @@ def getDates(thetype):
 def unzip(seq):
    return zip(*seq)
 
-def import():
+def importx():
    book = xlrd.open_workbook("/home/seth/Downloads/op.xls")
    sheet = book.sheets()[0]
    
