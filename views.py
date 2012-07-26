@@ -5,7 +5,7 @@ from data_log.models import Log,Single_Main,Main_Testing,Single_Nutrient
 from data_log.models import Micro_Nutrient_Testing,Ammonia_Nitrate,Ammonia_Nitrate_Testing 
 from django.core.context_processors import csrf
 import datetime
-import xlwt
+import xlwt,xlrd
 import os,tempfile
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
@@ -1303,7 +1303,46 @@ def getDates(thetype):
 def unzip(seq):
    return zip(*seq)
 
+def import():
+   book = xlrd.open_workbook("/home/seth/Downloads/op.xls")
+   sheet = book.sheets()[0]
    
+   for i in xrange(6,sheet.nrow): 
+      date = datetime.datetime(*xlrd.xldate_as_tuple(sheet.col(0,i).value,book.datemode))
+      name = sheet.col(1)[i].value
+      sys1 = convert(sheet.col(2)[i].value)
+      sys2 = convert(sheet.col(3)[i].value)
+      sys3 = convert(sheet.col(4)[i].value)
+      sys4 = convert(sheet.col(5)[i].value)
+      makeup = str(sheet.col(6)[i].value)
+      temp = convert(sheet.col(7)[i].value)
+      ph = convert(sheet.col(8)[i].value)
+      do = convert(sheet.col(9)[i].value)
+      hum = convert(sheet.col(10)[i].value)
+      note = str(sheet.col(11)[i].value)
+
+      l = Log(date=date,
+            author=name,
+            system1_food=sys1,
+            system2_food=sys2,
+            system3_food=sys3,
+            system4_food=sys4,
+            makeup_added=makeup,
+            temp=temp,
+            ph=ph,
+            do=do,
+            humidity=hum,
+            note=note)
+      l.save()
+
+def convert(a):
+   if a == '':
+      return -1
+   try:
+      a = float(a)
+   except:
+      return -1
+   return a
    
    
          
