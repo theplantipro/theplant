@@ -1310,10 +1310,10 @@ def importx(request):
    for i in xrange(6,sheet.nrows): 
       date = datetime.datetime(*xlrd.xldate_as_tuple(sheet.col(0)[i].value,book.datemode))
       name = sheet.col(1)[i].value
-      sys1 = convert(sheet.col(2)[i].value)
-      sys2 = convert(sheet.col(3)[i].value)
-      sys3 = convert(sheet.col(4)[i].value)
-      sys4 = convert(sheet.col(5)[i].value)
+      sys1 = convert_zero(sheet.col(2)[i].value)
+      sys2 = convert_zero(sheet.col(3)[i].value)
+      sys3 = convert_zero(sheet.col(4)[i].value)
+      sys4 = convert_zero(sheet.col(5)[i].value)
       makeup = str(sheet.col(6)[i].value)
       temp = convert(sheet.col(7)[i].value)
       ph = convert(sheet.col(8)[i].value)
@@ -1340,11 +1340,18 @@ def importx(request):
             note=note)
       l.save()
 
+def convert_zero(a):
+   try:
+      a = float(a)
+   except:
+      return 0 
+   return a
+
 def convert(a):
    try:
       a = float(a)
    except:
-      return None 
+      return -1 
    return a
    
    
