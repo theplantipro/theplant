@@ -1319,8 +1319,11 @@ def importx(request):
       ph = convert(sheet.col(8)[i].value)
       do = convert(sheet.col(9)[i].value)
       hum = convert(sheet.col(10)[i].value)
-      note = str(sheet.col(11)[i].value)
-
+      note = ''
+      try: 
+         note = str(sheet.col(11)[i].value)
+      except:
+         note=''
       l = Log(date=date,
             author=name,
             system1_food=sys1,
