@@ -438,7 +438,7 @@ def process(request):
       isAll = request.GET.get('alldates','')=='on' 
       action = request.GET.get('action')
       if isAll:
-         datetuple = getDates(action)
+         datetuple = getDates("spreadsheet")
          date1 = datetuple[0]
          date2 = datetuple[1]
       date1s = request.GET.get('date1','')
